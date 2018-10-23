@@ -1,5 +1,5 @@
-npx sequelize model:generate --name User --attributes firstName:string,lastName:string,email:string
+# npx sequelize model:generate --name User --attributes firstName:string,lastName:string,email:string
 npx sequelize db:create
 npx sequelize db:migrate
-npx sequelize seed:generate --name demo-user
+# npx sequelize seed:generate --name demo-user
 npx sequelize db:seed:all

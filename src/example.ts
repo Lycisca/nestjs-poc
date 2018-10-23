@@ -1,7 +1,3 @@
-// User.create({
-//   firstName: 'John',
-//   lastName: 'Hancock'
-// });
 import UserModel from './users/user.entity';
 
 UserModel.findAll().then(users => {
@@ -9,4 +5,4 @@ UserModel.findAll().then(users => {
 })
 
 console.log("Hello world")
-// npx ts-node -r tsconfig-paths/register src/example.ts
+// npx ts-node src/example.ts
