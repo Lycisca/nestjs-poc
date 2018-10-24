@@ -1,8 +1,8 @@
-import UserModel from '../src/users/user.entity';
+import User from '../src/users/user.entity';
 
 let count = 10;
 while (count > 0) {
-  UserModel.create({
+  User.create({
     firstName: 'John',
     lastName: 'Hancock'
   });

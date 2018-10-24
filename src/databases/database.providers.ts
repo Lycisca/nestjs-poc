@@ -1,5 +1,5 @@
 import { Sequelize } from 'sequelize-typescript';
-import { UserModel } from '../users/user.entity';
+import { User } from '../users/user.entity';
 
 const env = process.env.NODE_ENV || 'development';
 export const databaseProviders = [
@@ -14,7 +14,7 @@ export const databaseProviders = [
         password: 'password',
         database: 'database_development',
       });
-      sequelize.addModels([UserModel]);
+      sequelize.addModels([User]);
       await sequelize.sync();
       return sequelize;
     },

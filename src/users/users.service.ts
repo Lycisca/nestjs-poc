@@ -1,14 +1,14 @@
 import { Injectable, Inject } from '@nestjs/common';
-import { UserModel } from './user.entity';
+import { User } from './user.entity';
 
 @Injectable()
 export class UsersService {
   constructor(
     // Propoerty-based inyection
-    @Inject('UsersRepository') private readonly usersRepository: typeof UserModel) {}
-    // private readonly userService: UserModel) {}
+    @Inject('UsersRepository') private readonly usersRepository: typeof User) {}
+    // private readonly userService: User) {}
 
-  async findAll(): Promise<UserModel[]> {
-    return await this.usersRepository.findAll<UserModel>();
+  async findAll(): Promise<User[]> {
+    return await this.usersRepository.findAll<User>();
   }
 }
