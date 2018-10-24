@@ -26,7 +26,7 @@
 
 ## Description
 
-![coverage](coverage/coverage.svg)
+![coverage](coverage/badge.svg)
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
