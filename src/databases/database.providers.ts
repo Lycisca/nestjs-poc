@@ -15,7 +15,7 @@ export const databaseProviders = [
         database: 'database_development',
       });
       sequelize.addModels([User]);
-      await sequelize.sync();
+      // await sequelize.sync(); // Don't create tables to start application
       return sequelize;
     },
   },

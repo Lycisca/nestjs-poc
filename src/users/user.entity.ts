@@ -6,5 +6,5 @@ export class User extends Model<User> {
   firstName: string;
 
   @Column
-  lastName: number;
+  lastName: string;
 }
