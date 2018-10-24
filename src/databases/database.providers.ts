@@ -13,6 +13,14 @@ export const databaseProviders = [
         username: 'root',
         password: 'password',
         database: 'database_development',
+        define: {
+          // underscored: false
+          charset: 'utf8',
+          dialectOptions: {
+            collate: 'utf8_general_ci'
+          },
+          timestamps: true
+        }
       });
       sequelize.addModels([User]);
       // await sequelize.sync(); // Don't create tables to start application
