@@ -40,6 +40,7 @@
     "@types/sequelize": "^4.27.28",
     "@types/supertest": "^2.0.5",
     "jest": "^23.5.0",
+    "make-coverage-badge": "^1.0.1",
     "nodemon": "^1.18.3",
     "prettier": "^1.14.2",
     "rimraf": "^2.6.2",
@@ -66,6 +67,11 @@
     },
     "collectCoverage": true,
     "coverageDirectory": "../coverage",
+    "coverageReporters": [
+      "json-summary",
+      "text",
+      "lcov"
+    ],
     "testEnvironment": "node"
   }
 }
