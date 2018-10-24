@@ -6,7 +6,7 @@ const env = process.env.NODE_ENV || 'development';
 export const databaseProviders = [
   {
     provide: 'SequelizeToken',
-    useFactory: async () => {
+    useFactory: () => {
       const databaseConfig = DatabaseConfig[env];
       const sequelize = new Sequelize(databaseConfig);
       sequelize.addModels([User]);
