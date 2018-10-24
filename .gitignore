@@ -1,5 +1,5 @@
 node_modules
 dist
 volumes
-coverage
-!coverage/badge.svg
+/coverage/*
+!/coverage/badge.svg
