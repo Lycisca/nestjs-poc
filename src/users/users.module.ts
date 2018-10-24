@@ -9,7 +9,7 @@ import { DatabaseModule } from '../databases/database.module';
   controllers: [UsersController],
   providers: [UsersService, ...usersProviders],
   imports: [DatabaseModule],
-  exports: [] // If we want to share the CatsService instance between few other modules
+  exports: []
 })
 
 export class UsersModule {}
