@@ -1,0 +1,21 @@
+{
+  "editor.tabSize": 2,
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  // "editor.snippetSuggestions": "none",
+  // "editor.suggestSelection": "first",
+  // "editor.wordBasedSuggestions": false,
+  "editor.minimap.enabled": false,
+  // Custom Settings
+  "editor.formatOnSave": true,
+  "coverage-gutters.lcovname": "coverage/lcov.info",
+  "search.exclude": {
+    "**/.git": true,
+    "**/node_modules": true,
+    "**/deps": true,
+    "**/dist": true,
+    "**/bower_components": true,
+    "**/tmp": true,
+    "**/volumes": true
+  }
+}
