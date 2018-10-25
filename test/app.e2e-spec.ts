@@ -19,6 +19,17 @@ describe('AppController (e2e)', () => {
     return request(app.getHttpServer())
       .get('/')
       .expect(200)
-      .expect('Hello World!');
+      .expect('Hello world!!!!!');
+  });
+
+  it('/users/user-name (GET)', () => {
+    return request(app.getHttpServer())
+      .get('/users/user-name')
+      .expect(400)
+      .expect({
+        statusCode: 400,
+        error: 'Bad Request',
+        message: 'Validation failed',
+      });
   });
 });
