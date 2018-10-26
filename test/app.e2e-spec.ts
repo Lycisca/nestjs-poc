@@ -13,6 +13,13 @@ const createApp = async () => {
   return app.init();
 };
 
+const createUserByHttp = (app, userFixture = undefined) =>
+  request(app.getHttpServer())
+    .post('/users')
+    .send(userFixture || { firstName: 'John', lastName: 'Doe' })
+    .set('Accept', 'application/json')
+    .expect(201);
+
 describe('AppController (e2e)', () => {
   let app: INestApplication;
 
@@ -41,15 +48,11 @@ describe('AppController (e2e)', () => {
       });
   });
 
-  it('GET index /users', done => {
-    return request(app.getHttpServer())
+  it('GET index /users', async () => {
+    const { body } = await request(app.getHttpServer())
       .get('/users')
-      .expect(200)
-      .end((err, res) => {
-        expect(res.body).toBeInstanceOf(Array);
-        if (err) return done(err);
-        done();
-      });
+      .expect(200);
+    expect(body).toBeInstanceOf(Array);
   });
 
   describe('GET show', () => {
@@ -64,47 +67,31 @@ describe('AppController (e2e)', () => {
         });
     });
 
-    it('/users/1', done => {
-      return request(app.getHttpServer())
-        .get('/users/1')
-        .expect(200)
-        .end((err, res) => {
-          expect(res.body).toHaveProperty('firstName');
-          if (err) return done(err);
-          done();
-        });
+    it('/users/:id', async () => {
+      const { body } = await createUserByHttp(app);
+      const response = await request(app.getHttpServer())
+        .get(`/users/${body.id}`)
+        .expect(200);
+      expect(response.body).toHaveProperty('firstName');
     });
   });
 
-  it('PUT update /users/1', done => {
-    return request(app.getHttpServer())
-      .put('/users/1')
+  it('PUT update /users/:id', async () => {
+    const { body } = await createUserByHttp(app);
+    const response = await request(app.getHttpServer())
+      .put(`/users/${body.id}`)
       .send({ firstName: 'John2' })
       .set('Accept', 'application/json')
-      .expect(200)
-      .end((err, res) => {
-        expect(res.body).toHaveProperty('firstName', 'John2');
-        if (err) return done(err);
-        done();
-      });
+      .expect(200);
+    expect(response.body).toHaveProperty('firstName', 'John2');
+  });
+
+  it('DELETE destroy /users', async () => {
+    const { body } = await createUserByHttp(app);
+
+    const response = await request(app.getHttpServer())
+      .delete(`/users/${body.id}`)
+      .set('Accept', 'application/json')
+      .expect(200);
   });
 });
-
-// describe('APPLICATION', () => {
-//   let app: INestApplication;
-
-//   beforeAll(async () => {
-//     app = await createApp();
-//   });
-
-//   it('DELETE destroy /users', done => {
-//     request(app.getHttpServer())
-//       .delete('/users/1')
-//       .set('Accept', 'application/json')
-//       .expect(200)
-//       .end((err, res) => {
-//         if (err) return done(err);
-//         done();
-//       });
-//   });
-// });
