@@ -1,6 +1,6 @@
 import { Sequelize } from 'sequelize-typescript';
 import { User } from '../users/user.entity';
-import DatabaseConfig from '../../config/database.js'
+import DatabaseConfig from '../config/database';
 
 const env = process.env.NODE_ENV || 'development';
 export const databaseProviders = [
