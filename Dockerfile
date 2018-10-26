@@ -1,4 +1,4 @@
-FROM node:10.12.0-slim as builder
+FROM node:10.12.0-alpine as builder
 
 ENV NODE_ENV=production
 
@@ -9,7 +9,7 @@ COPY . .
 RUN npm run build:prod
 
 # ======== Multi stage ==========
-FROM node:10.12.0-slim
+FROM node:10.12.0-alpine
 
 ENV NODE_ENV=production
 
