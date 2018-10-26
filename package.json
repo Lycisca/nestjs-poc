@@ -71,7 +71,10 @@
     },
     "collectCoverage": true,
     "coverageDirectory": "../coverage",
-    "reporters": ["default", "jest-junit"],
+    "reporters": [
+      "default",
+      "jest-junit"
+    ],
     "coverageReporters": [
       "json-summary",
       "text",
