@@ -43,6 +43,7 @@
     "@types/sequelize": "^4.27.28",
     "@types/supertest": "^2.0.5",
     "jest": "^23.5.0",
+    "jest-junit": "^5.2.0",
     "make-coverage-badge": "^1.0.1",
     "nodemon": "^1.18.3",
     "prettier": "^1.14.2",
@@ -70,6 +71,7 @@
     },
     "collectCoverage": true,
     "coverageDirectory": "../coverage",
+    "reporters": ["default", "jest-junit"],
     "coverageReporters": [
       "json-summary",
       "text",
