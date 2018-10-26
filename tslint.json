@@ -7,6 +7,8 @@
         "no-unused-expression": true
     },
     "rules": {
+        "triple-equals": false,
+        "no-console": [true, "warning"],
         "eofline": false,
         "quotemark": [
             true,
