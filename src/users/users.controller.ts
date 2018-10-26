@@ -23,18 +23,18 @@ export class UsersController {
   @Post()
   @UsePipes(new ValidationUser())
   async create(@Body() createUserDto: CreateUserDto) {
-    await this.usersService.create(createUserDto);
+    return this.usersService.create(createUserDto);
   }
 
   @Put(':id')
   @UsePipes(new ValidationUser())
   async update(@Param('id') userId: number, @Body() updateUserDto: UpdateUserDto) {
-    await this.usersService.update(userId, updateUserDto);
+    return this.usersService.update(userId, updateUserDto);
   }
 
   @Delete(':id')
   @UsePipes(new ValidationUser())
   async destroy(@Param('id') userId: number){
-    await this.usersService.destroy(userId);
+    return this.usersService.destroy(userId);
   }
 }

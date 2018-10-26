@@ -9,14 +9,14 @@ class UserMock extends User {
   }
 }
 
-const usersServiceFactory = (UserRepository = User) => {
+const usersServiceFactory = (UserRepository) => {
   databaseProviders[0].useFactory();
   return new UsersService(UserRepository);
 };
 
 describe('Users Service', () => {
   it('test database index query', async () => {
-    const usersService = usersServiceFactory();
+    const usersService = usersServiceFactory(User);
     const users = await usersService.index()
     expect(users).toBeInstanceOf(Array);
   });
