@@ -1,4 +1,13 @@
-import { Controller, Get, Post, Delete, Put, Param, Body, UsePipes } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Delete,
+  Put,
+  Param,
+  Body,
+  UsePipes,
+} from '@nestjs/common';
 import { UsersService } from './users.service';
 import { User } from './user.entity';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -28,7 +37,10 @@ export class UsersController {
 
   @Put(':id')
   @UsePipes(new ValidationUser())
-  async update(@Param('id') userId: number, @Body() updateUserDto: UpdateUserDto) {
+  async update(
+    @Param('id') userId: number,
+    @Body() updateUserDto: UpdateUserDto,
+  ) {
     return this.usersService.update(userId, updateUserDto);
   }
 
