@@ -1,10 +1,8 @@
 class RealService implements Service {
-  constructor() {
-
-  }
+  constructor() {}
 
   findUsers(): string[] {
-    return ["User1", "User2"];
+    return ['User1', 'User2'];
   }
 
   findMostPopular(): string {
@@ -12,14 +10,11 @@ class RealService implements Service {
   }
 }
 
-
 class TestService implements Service {
-  constructor() {
-
-  }
+  constructor() {}
 
   findUsers(): string[] {
-    return ["TestUser1", "TestUser2"];
+    return ['TestUser1', 'TestUser2'];
   }
 
   findMostPopular(): string {
@@ -32,16 +27,16 @@ interface Service {
   findMostPopular(): string;
 }
 
-
 class Controller {
-  constructor( private service: Service) {}
-
+  constructor(private service: Service) {}
 
   findUsers(): any {
-    return {'mostPopular': this.service.findMostPopular(), 'all': this.service.findUsers()};
+    return {
+      mostPopular: this.service.findMostPopular(),
+      all: this.service.findUsers(),
+    };
   }
 }
-
 
 const controller: Controller = new Controller(new TestService());
 

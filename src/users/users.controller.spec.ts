@@ -10,11 +10,11 @@ describe('UsersController', () => {
 
   beforeEach(async () => {
     const module = await Test.createTestingModule({
-        controllers: [UsersController],
-        providers: [UsersService, ...usersProviders],
-        imports: [DatabaseModule],
-        exports: []
-      }).compile();
+      controllers: [UsersController],
+      providers: [UsersService, ...usersProviders],
+      imports: [DatabaseModule],
+      exports: [],
+    }).compile();
 
     usersService = module.get(UsersService);
     usersController = module.get(UsersController);
@@ -31,7 +31,7 @@ describe('UsersController', () => {
 
   describe('show', () => {
     it('should return a user', async () => {
-      const result = {firstName: "Nuria", lastName: "Hernández"}
+      const result = { firstName: 'Nuria', lastName: 'Hernández' };
       jest.spyOn(usersService, 'show').mockImplementation(() => result);
 
       expect(await usersController.show(1)).toBe(result);
@@ -40,8 +40,8 @@ describe('UsersController', () => {
 
   describe('create', () => {
     it('should return a new user', async () => {
-      const result = {firstName: "Nuria", lastName: "Hernández"}
-      jest.spyOn(usersService, 'create').mockImplementation(() => result );
+      const result = { firstName: 'Nuria', lastName: 'Hernández' };
+      jest.spyOn(usersService, 'create').mockImplementation(() => result);
 
       expect(await usersController.create(result)).toBe(result);
     });
@@ -49,8 +49,8 @@ describe('UsersController', () => {
 
   describe('create', () => {
     it('should return a new user', async () => {
-      const result = {firstName: "Nuria", lastName: "Hernández"}
-      jest.spyOn(usersService, 'create').mockImplementation(() => result );
+      const result = { firstName: 'Nuria', lastName: 'Hernández' };
+      jest.spyOn(usersService, 'create').mockImplementation(() => result);
 
       expect(await usersController.create(result)).toBe(result);
     });
@@ -58,21 +58,22 @@ describe('UsersController', () => {
 
   describe('update', () => {
     it('should return a updated user', async () => {
-      const result = {firstName: "Nuria", lastName: "Hernández"}
-      jest.spyOn(usersService, 'update').mockImplementation(
-        () => ({id: 1, ...result})
-      );
+      const result = { firstName: 'Nuria', lastName: 'Hernández' };
+      jest
+        .spyOn(usersService, 'update')
+        .mockImplementation(() => ({ id: 1, ...result }));
 
-      expect(await usersController.update(1, result)).toEqual({id: 1, ...result});
+      expect(await usersController.update(1, result)).toEqual({
+        id: 1,
+        ...result,
+      });
     });
   });
 
   describe('destroy', () => {
     it('should return a updated user', async () => {
-      const result = {firstName: "Nuria", lastName: "Hernández"}
-      jest.spyOn(usersService, 'destroy').mockImplementation(
-        () => result
-      );
+      const result = { firstName: 'Nuria', lastName: 'Hernández' };
+      jest.spyOn(usersService, 'destroy').mockImplementation(() => result);
 
       expect(await usersController.destroy(1)).toEqual(result);
     });
