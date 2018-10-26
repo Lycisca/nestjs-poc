@@ -6,7 +6,7 @@ export class ValidationUser implements PipeTransform<string> {
   async transform(value: string | any, metadata: ArgumentMetadata) {
     // Id param must be number
     if (metadata.type == 'param' && metadata.data == 'id') {
-      const val: number = parseInt(value);
+      const val: number = parseInt(value, 10);
       if (isNaN(val)) {
         throw new BadRequestException('Validation failed');
       }
