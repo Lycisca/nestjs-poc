@@ -3,3 +3,8 @@ npx sequelize db:create
 npx sequelize db:migrate
 # npx sequelize seed:generate --name demo-user
 npx sequelize db:seed:all
+
+
+sudo docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=h8t7-X9IAO' -p 1433:1433 -v /var/opt/mssql:/var/opt/mssql -d microsoft/mssql-server-linux
+
+sudo docker exec -it <container-id> /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P h8t7-X9IAO

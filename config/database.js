@@ -2,12 +2,12 @@ const fs = require('fs');
 
 const config = {
   development: {
-    dialect: "mysql",
+    dialect: "mssql",
     username: "root",
     password: "password",
     database: "database_development",
     host: process.env.DB_HOSTNAME || "127.0.0.1",
-    port: 3306,
+    port: 1433,
     define: {
       // underscored: false
       charset: 'utf8',
@@ -18,12 +18,15 @@ const config = {
     }
   },
   test: {
-    dialect: "mysql",
-    username: "root",
-    password: "password",
+    dialect: "mssql",
+    username: 'sa',
+    password: 'h8t7-X9IAO',
     database: "database_test",
     host: process.env.DB_HOSTNAME || "127.0.0.1",
-    port: 3306,
+    dialectOptions: {
+      encrypt: false,
+    },
+    port: 1433,
     define: {
       // underscored: false
       charset: 'utf8',

@@ -1,17 +1,19 @@
 version: '2.1'
 services:
-  # db:
-  #   image: 'mcr.microsoft.com/mssql/server:2017-latest'
-  #   ports:
-  #     - "1433:1433"
-  #   environment:
-  #     SA_PASSWORD: 'yourStrong(!)Password'
-  #     ACCEPT_EULA: 'Y'
   db:
-    image: 'mysql:5.7'
+    image: 'mcr.microsoft.com/mssql/server:2017-latest'
     ports:
-      - "3306:3306"
+      - '1433:1433'
     environment:
-      MYSQL_ROOT_PASSWORD: password
+      SA_PASSWORD: 'h8t7-X9IAO'
+      ACCEPT_EULA: 'Y'
     volumes:
-      - ./volumes/mysql:/var/lib/mysql
+      - ./volumes/mssql:/var/opt/mssql
+  # db:
+  #   image: 'mysql:5.7'
+  #   ports:
+  #     - "3306:3306"
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: password
+  #   volumes:
+  #     - ./volumes/mysql:/var/lib/mysql
