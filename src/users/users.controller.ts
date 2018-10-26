@@ -32,7 +32,7 @@ export class UsersController {
   @Post()
   @UsePipes(new ValidationUser())
   async create(@Body() createUserDto: CreateUserDto) {
-    return await this.usersService.create(createUserDto);
+    return this.usersService.create(createUserDto);
   }
 
   @Put(':id')
@@ -41,12 +41,12 @@ export class UsersController {
     @Param('id') userId: number,
     @Body() updateUserDto: UpdateUserDto,
   ) {
-    return await this.usersService.update(userId, updateUserDto);
+    return this.usersService.update(userId, updateUserDto);
   }
 
   @Delete(':id')
   @UsePipes(new ValidationUser())
-  async destroy(@Param('id') userId: number) {
-    await this.usersService.destroy(userId);
+  async destroy(@Param('id') userId: number){
+    return this.usersService.destroy(userId);
   }
 }
