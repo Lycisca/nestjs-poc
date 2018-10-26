@@ -1,7 +1,15 @@
-import { UserInterface } from "../users/users.interface"
+import { CreateCatsDto } from "./dto/create-cats.dto";
+import { UpdateCatsDto } from "./dto/update-cats-dto";
 
-interface CatsInterface {
+export interface CatsInterface {
   name: string,
-  age: number,
-  user(userId: number): { user: UserInterface }
+  age: number
+}
+
+export interface CatsServiceInterface {
+  index(): Array<CatsInterface>
+  show(): CatsInterface
+  create(createCatDto: CreateCatsDto): CatsInterface
+  update(catId: number, updateCatDto: UpdateCatsDto): CatsInterface
+  delete(catId: number): CatsInterface
 }
