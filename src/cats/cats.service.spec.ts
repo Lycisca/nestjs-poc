@@ -3,19 +3,18 @@ import { CatsService } from './cats.service';
 import { CatsServiceInterface } from './cats.interface';
 import { databaseProviders } from '../databases/database.providers';
 
-// class CatMock implements CatsServiceInterface {
+// class CatRepositoryMock implements CatsServiceInterface {
 //   static findAll<T extends Model<T>>(
 //     this: new () => T,
 //     options?: IFindOptions<T>,
 //   ): any {
-//     return [{ firstName: 'cat' }];
+//     return [{ name: 'cat' }];
 //   }
 // }
 
-// const catsServiceFactory = CatRepository => {
-//   // databaseProviders[0].useFactory();
-//   // return new CatsService(CatRepository);
-// };
+const catsServiceFactory = (CatRepository = undefined) => {
+  return new CatsService();
+};
 
 describe('Cats Service', () => {
   it('cats service', async () => {
@@ -23,10 +22,10 @@ describe('Cats Service', () => {
     expect(service).toBeInstanceOf(CatsService);
   });
 
-  // it('test interface', async () => {
-  //   const repo = UserMock;
-  //   const usersService = usersServiceFactory(repo);
-  //   const users = await usersService.index();
-  //   expect(users).toEqual([{ firstName: 'user' }]);
-  // });
+  it('test interface', async () => {
+    // const repo = CatRepositoryMock;
+    const catsService = catsServiceFactory();
+    const cats = await catsService.index();
+    expect(cats).toEqual([{ name: 'cat' }]);
+  });
 });
