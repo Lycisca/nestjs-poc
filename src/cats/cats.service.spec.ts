@@ -10,6 +10,9 @@ class CatRepositoryMock {
   ): any {
     return [{ name: 'cat2' }];
   }
+  static findById() {
+    return { name: 'cat3' };
+  }
 }
 
 const catsServiceFactory = (CatRepository = undefined) => {
@@ -22,10 +25,17 @@ describe('Cats Service', () => {
     expect(service).toBeInstanceOf(CatsService);
   });
 
-  it('test interface', async () => {
+  it('test interface index', async () => {
     const repo = CatRepositoryMock;
     const catsService = catsServiceFactory(CatRepositoryMock);
     const cats = await catsService.index();
     expect(cats).toEqual([{ name: 'cat2' }]);
+  });
+
+  it('test interface show', async () => {
+    const repo = CatRepositoryMock;
+    const catsService = catsServiceFactory(CatRepositoryMock);
+    const cats = await catsService.show();
+    expect(cats).toEqual({ name: 'cat3' });
   });
 });

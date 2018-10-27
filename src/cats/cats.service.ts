@@ -3,4 +3,7 @@ export class CatsService {
   index() {
     return this.usersRepository.findAll();
   }
+  show() {
+    return this.usersRepository.findById();
+  }
 }
