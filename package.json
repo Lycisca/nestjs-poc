@@ -12,7 +12,7 @@
     "db:reset": "sequelize db:create && sequelize db:drop && sequelize db:create && sequelize db:migrate && npm run db:test:reset",
     "start:dev": "nodemon",
     "start:debug": "nodemon --config nodemon-debug.json",
-    "prestart:prod": "rimraf dist && tsc",
+    "build:prod": "rm -fr dist && tsc",
     "start:prod": "node dist/main.js",
     "start:hmr": "node dist/server",
     "lint": "tslint -p tsconfig.json -c tslint.json",
