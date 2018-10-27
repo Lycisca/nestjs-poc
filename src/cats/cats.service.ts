@@ -1,5 +1,6 @@
 export class CatsService {
+  constructor(private usersRepository) {}
   index() {
-    return [{ name: 'cat' }];
+    return this.usersRepository.findAll();
   }
 }
