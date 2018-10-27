@@ -1,5 +1,5 @@
 import { IFindOptions, Model } from 'sequelize-typescript';
-import { CatsService } from './users.service';
+import { CatsService } from './cats.service';
 import { CatsServiceInterface } from './cats.interface';
 import { databaseProviders } from '../databases/database.providers';
 
@@ -17,8 +17,8 @@ import { databaseProviders } from '../databases/database.providers';
 //   // return new CatsService(CatRepository);
 // };
 
-describe('Users Service', () => {
-  it('users service', async () => {
+describe('Cats Service', () => {
+  it('cats service', async () => {
     const service = new CatsService();
     expect(service).toBeInstanceOf(CatsService);
   });
