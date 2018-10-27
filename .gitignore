@@ -3,3 +3,4 @@ dist
 volumes
 /coverage/*
 !/coverage/badge.svg
+junit.xml

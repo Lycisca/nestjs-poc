@@ -46,7 +46,7 @@ export class UsersController {
 
   @Delete(':id')
   @UsePipes(new ValidationUser())
-  async destroy(@Param('id') userId: number){
+  async destroy(@Param('id') userId: number) {
     return this.usersService.destroy(userId);
   }
 }

@@ -7,8 +7,9 @@ import { User } from './user.entity';
 export class UsersService {
   constructor(
     // Propoerty-based inyection
-    @Inject('UsersRepository') private readonly usersRepository: typeof User) {}
-    // private readonly userService: User) {}
+    @Inject('UsersRepository') private readonly usersRepository: typeof User,
+  ) {}
+  // private readonly userService: User) {}
 
   async index(): Promise<User[]> {
     return await this.usersRepository.findAll<User>();
@@ -28,12 +29,12 @@ export class UsersService {
 
   async update(userId: number, updateUserDto: UpdateUserDto): Promise<User> {
     const user = await User.findById(userId);
-    return await user.update(updateUserDto)
+    return await user.update(updateUserDto);
   }
 
   async destroy(userId: number): Promise<User> {
-    const user = await User.findById(userId)
-    user.destroy({ force: true })
-    return user
+    const user = await User.findById(userId);
+    user.destroy({ force: true });
+    return user;
   }
 }
