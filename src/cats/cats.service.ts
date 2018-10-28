@@ -9,8 +9,8 @@ export class CatsService implements CatsServiceInterface {
     return this.catsRepository.findAll();
   }
 
-  show() {
-    return this.catsRepository.findById();
+  show(catId) {
+    return this.catsRepository.findById(catId);
   }
 
   async create(createCatDto: CreateCatsDto) {

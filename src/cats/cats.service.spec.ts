@@ -54,7 +54,7 @@ describe('Cats Service', () => {
   it('test interface show', async () => {
     const repo = CatRepositoryMock;
     const catsService = catsServiceFactory(CatRepositoryMock);
-    const cats = await catsService.show();
+    const cats = await catsService.show(1);
     expect(cats).toEqual({ name: 'cat3' });
   });
 
