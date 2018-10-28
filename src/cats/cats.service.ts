@@ -18,7 +18,7 @@ export class CatsService implements CatsServiceInterface {
   }
 
   async update(catId: number, updateCatDto: UpdateCatsDto) {
-    const cat = this.catsRepository.findById(catId);
+    const cat = await this.catsRepository.findById(catId);
     return cat.update(updateCatDto);
   }
 

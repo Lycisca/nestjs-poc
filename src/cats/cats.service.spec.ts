@@ -4,28 +4,28 @@ import { CatsServiceInterface } from './cats.interface';
 import { databaseProviders } from '../databases/database.providers';
 
 class CatRepositoryMock {
-  static findAll<T extends Model<T>>(
+  static async findAll<T extends Model<T>>(
     this: new () => T,
     options?: IFindOptions<T>,
-  ): any {
+  ): Promise<any> {
     return [{ name: 'cat2' }];
   }
 
-  static findById() {
+  static async findById() {
     return { name: 'cat3' };
   }
 
-  static create(catParams) {
+  static async create(catParams) {
     return catParams;
   }
 
-  update(catParams) {
+  async update(catParams) {
     return catParams;
   }
 }
 
 class CatRepositoryMockUpdate {
-  static findById(catId) {
+  static async findById(catId) {
     return new CatRepositoryMockUpdate();
   }
 
