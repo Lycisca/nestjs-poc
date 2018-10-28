@@ -13,7 +13,7 @@ export class CatsService implements CatsServiceInterface {
     return this.catsRepository.findById(catId);
   }
 
-  async create(createCatDto: CreateCatsDto) {
+  create(createCatDto: CreateCatsDto) {
     return this.catsRepository.create(createCatDto);
   }
 
@@ -22,7 +22,7 @@ export class CatsService implements CatsServiceInterface {
     return cat.update(updateCatDto);
   }
 
-  async delete(catId: number) {
+  delete(catId: number) {
     return this.catsRepository.delete(catId);
   }
 }

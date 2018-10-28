@@ -29,8 +29,12 @@ class CatRepositoryMockUpdate {
     return new CatRepositoryMockUpdate();
   }
 
-  update(catParams) {
+  async update(catParams) {
     return catParams;
+  }
+
+  async delete(catId) {
+    return { name: 'cat_delete' };
   }
 }
 
@@ -45,32 +49,32 @@ describe('Cats Service', () => {
   });
 
   it('test interface index', async () => {
-    const repo = CatRepositoryMock;
-    const catsService = catsServiceFactory(CatRepositoryMock);
-    const cats = await catsService.index();
+    const cats = await catsServiceFactory(CatRepositoryMock).index();
     expect(cats).toEqual([{ name: 'cat2' }]);
   });
 
   it('test interface show', async () => {
-    const repo = CatRepositoryMock;
-    const catsService = catsServiceFactory(CatRepositoryMock);
-    const cats = await catsService.show(1);
+    const cats = await catsServiceFactory(CatRepositoryMock).show(1);
     expect(cats).toEqual({ name: 'cat3' });
   });
 
   it('test interface create', async () => {
-    const repo = CatRepositoryMock;
-    const catsService = catsServiceFactory(repo);
     const catParams = { name: 'cat4', age: 1 };
-    const cat = await catsService.create(catParams);
+    const cat = await catsServiceFactory(CatRepositoryMock).create(catParams);
     expect(cat).toEqual(catParams);
   });
 
   it('test interface update', async () => {
-    const repo = CatRepositoryMockUpdate;
-    const catsService = catsServiceFactory(repo);
     const catParams = { age: 2 };
-    const cat = await catsService.update(1, catParams);
+    const cat = await catsServiceFactory(CatRepositoryMockUpdate).update(
+      1,
+      catParams,
+    );
     expect(cat.age).toEqual(2);
+  });
+
+  it('test interface delete', async () => {
+    const cat = await catsServiceFactory(CatRepositoryMockUpdate).delete(1);
+    expect(cat).toEqual({ name: 'cat_delete' });
   });
 });
