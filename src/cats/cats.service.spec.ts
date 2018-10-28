@@ -10,8 +10,27 @@ class CatRepositoryMock {
   ): any {
     return [{ name: 'cat2' }];
   }
+
   static findById() {
     return { name: 'cat3' };
+  }
+
+  static create(catParams) {
+    return catParams;
+  }
+
+  update(catParams) {
+    return catParams;
+  }
+}
+
+class CatRepositoryMockUpdate {
+  static findById(catId) {
+    return new CatRepositoryMockUpdate();
+  }
+
+  update(catParams) {
+    return catParams;
   }
 }
 
@@ -37,5 +56,21 @@ describe('Cats Service', () => {
     const catsService = catsServiceFactory(CatRepositoryMock);
     const cats = await catsService.show();
     expect(cats).toEqual({ name: 'cat3' });
+  });
+
+  it('test interface create', async () => {
+    const repo = CatRepositoryMock;
+    const catsService = catsServiceFactory(repo);
+    const catParams = { name: 'cat4', age: 1 };
+    const cat = await catsService.create(catParams);
+    expect(cat).toEqual(catParams);
+  });
+
+  it('test interface update', async () => {
+    const repo = CatRepositoryMockUpdate;
+    const catsService = catsServiceFactory(repo);
+    const catParams = { age: 2 };
+    const cat = await catsService.update(1, catParams);
+    expect(cat.age).toEqual(2);
   });
 });

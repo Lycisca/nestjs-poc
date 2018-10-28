@@ -3,25 +3,26 @@ import { CreateCatsDto } from './dto/create-cats.dto';
 import { UpdateCatsDto } from './dto/update-cats-dto';
 
 export class CatsService implements CatsServiceInterface {
-  constructor(private usersRepository) {}
+  constructor(private catsRepository) {}
 
   index() {
-    return this.usersRepository.findAll();
+    return this.catsRepository.findAll();
   }
 
   show() {
-    return this.usersRepository.findById();
+    return this.catsRepository.findById();
   }
 
   async create(createCatDto: CreateCatsDto) {
-    return { name: 'string', age: 1, user_id: 1 };
+    return this.catsRepository.create(createCatDto);
   }
 
   async update(catId: number, updateCatDto: UpdateCatsDto) {
-    return { name: 'string', age: 1, user_id: 1 };
+    const cat = this.catsRepository.findById(catId);
+    return cat.update(updateCatDto);
   }
 
   async delete(catId: number) {
-    return { name: 'string', age: 1, user_id: 1 };
+    return this.catsRepository.delete(catId);
   }
 }

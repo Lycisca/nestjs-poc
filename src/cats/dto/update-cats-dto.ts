@@ -2,7 +2,7 @@ import { ApiModelProperty } from '@nestjs/swagger';
 
 export class UpdateCatsDto {
   @ApiModelProperty()
-  readonly name: string;
+  readonly name?: string;
   @ApiModelProperty()
-  readonly age: number;
+  readonly age?: number;
 }
