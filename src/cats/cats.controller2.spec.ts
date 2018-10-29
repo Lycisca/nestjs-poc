@@ -1,6 +1,8 @@
 import { Test } from '@nestjs/testing';
 import { CatsController } from './cats.controller';
 import { CatsInterface, CatsServiceInterface } from './cats.interface';
+import { CreateCatDto } from './dto/create-cat.dto';
+import { UpdateCatDto } from './dto/update-cat-dto';
 
 class CatsServiceMock implements CatsServiceInterface {
   index(): Promise<CatsInterface[]> {
@@ -9,15 +11,10 @@ class CatsServiceMock implements CatsServiceInterface {
   show(catId: number): Promise<CatsInterface> {
     throw new Error('Method not implemented.');
   }
-  create(
-    createCatDto: import('/home/nury/src/nestjs-poc/src/cats/dto/create-cat.dto').CreateCatDto,
-  ): Promise<CatsInterface> {
+  create(createCatDto: CreateCatDto): Promise<CatsInterface> {
     throw new Error('Method not implemented.');
   }
-  update(
-    catId: number,
-    updateCatDto: import('/home/nury/src/nestjs-poc/src/cats/dto/update-cat-dto').UpdateCatDto,
-  ): Promise<CatsInterface> {
+  update(catId: number, updateCatDto: UpdateCatDto): Promise<CatsInterface> {
     throw new Error('Method not implemented.');
   }
   delete(catId: number): Promise<CatsInterface> {
