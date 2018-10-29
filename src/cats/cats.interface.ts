@@ -1,5 +1,5 @@
-import { CreateCatsDto } from './dto/create-cats.dto';
-import { UpdateCatsDto } from './dto/update-cats-dto';
+import { CreateCatDto } from './dto/create-cat.dto';
+import { UpdateCatDto } from './dto/update-cat-dto';
 
 export interface CatsInterface {
   name: string;
@@ -9,8 +9,8 @@ export interface CatsInterface {
 
 export interface CatsServiceInterface {
   index(): Promise<Array<CatsInterface>>;
-  show(catId: string): Promise<CatsInterface>;
-  create(createCatDto: CreateCatsDto): Promise<CatsInterface>;
-  update(catId: number, updateCatDto: UpdateCatsDto): Promise<CatsInterface>;
+  show(catId: number): Promise<CatsInterface>;
+  create(createCatDto: CreateCatDto): Promise<CatsInterface>;
+  update(catId: number, updateCatDto: UpdateCatDto): Promise<CatsInterface>;
   delete(catId: number): Promise<CatsInterface>;
 }

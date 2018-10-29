@@ -1,6 +1,6 @@
 import { CatsServiceInterface } from './cats.interface';
-import { CreateCatsDto } from './dto/create-cats.dto';
-import { UpdateCatsDto } from './dto/update-cats-dto';
+import { CreateCatDto } from './dto/create-cat.dto';
+import { UpdateCatDto } from './dto/update-cat-dto';
 
 export class CatsService implements CatsServiceInterface {
   constructor(private catsRepository) {}
@@ -13,11 +13,11 @@ export class CatsService implements CatsServiceInterface {
     return this.catsRepository.findById(catId);
   }
 
-  create(createCatDto: CreateCatsDto) {
+  create(createCatDto: CreateCatDto) {
     return this.catsRepository.create(createCatDto);
   }
 
-  async update(catId: number, updateCatDto: UpdateCatsDto) {
+  async update(catId: number, updateCatDto: UpdateCatDto) {
     const cat = await this.catsRepository.findById(catId);
     return cat.update(updateCatDto);
   }
