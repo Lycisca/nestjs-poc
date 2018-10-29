@@ -1,0 +1,3 @@
+#!/bin/bash
+
+docker run --rm jordi/ab -k -c 20 -n 250 $@
