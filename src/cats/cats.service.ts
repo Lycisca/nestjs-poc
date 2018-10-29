@@ -22,7 +22,8 @@ export class CatsService implements CatsServiceInterface {
     return cat.update(updateCatDto);
   }
 
-  delete(catId: number) {
-    return this.catsRepository.delete(catId);
+  async delete(catId: number) {
+    const cat = await this.catsRepository.findById(catId);
+    return cat.destroy({ force: true });
   }
 }

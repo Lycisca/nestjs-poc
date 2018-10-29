@@ -33,7 +33,7 @@ class CatRepositoryMockUpdate {
     return catParams;
   }
 
-  async delete(catId) {
+  async destroy(catId) {
     return { name: 'cat_delete' };
   }
 }
