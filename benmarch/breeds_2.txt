@@ -1,0 +1,45 @@
+This is ApacheBench, Version 2.3 <$Revision: 1826891 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 172.17.0.1 (be patient)
+
+
+Server Software:        nginx
+Server Hostname:        172.17.0.1
+Server Port:            3000
+
+Document Path:          /cats_breeds
+Document Length:        3049 bytes
+
+Concurrency Level:      20
+Time taken for tests:   8.669 seconds
+Complete requests:      250
+Failed requests:        185
+   (Connect: 0, Receive: 0, Length: 185, Exceptions: 0)
+Non-2xx responses:      185
+Keep-Alive requests:    0
+Total transferred:      292726 bytes
+HTML transferred:       209100 bytes
+Requests per second:    28.84 [#/sec] (mean)
+Time per request:       693.520 [ms] (mean)
+Time per request:       34.676 [ms] (mean, across all concurrent requests)
+Transfer rate:          32.98 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.4      0       2
+Processing:   542  611  79.2    572     837
+Waiting:      542  610  79.0    572     837
+Total:        542  611  79.4    573     837
+
+Percentage of the requests served within a certain time (ms)
+  50%    573
+  66%    591
+  75%    609
+  80%    694
+  90%    766
+  95%    789
+  98%    803
+  99%    810
+ 100%    837 (longest request)
