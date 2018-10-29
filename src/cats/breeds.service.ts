@@ -1,13 +1,13 @@
 import { Injectable } from '@nestjs/common';
 
-interface Breed {
+export interface Breed {
   breed: string;
   country: string;
   origin: string;
   coat: string;
   pattern: string;
 }
-interface Requester {
+export interface Requester {
   get: (url: string) => Promise<{ data: { data: Breed[] } }>;
 }
 

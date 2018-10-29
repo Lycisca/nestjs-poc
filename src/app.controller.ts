@@ -1,10 +1,15 @@
 import { Get, Controller, Res, Response, HttpStatus } from '@nestjs/common';
 import { AppService } from './app.service';
-const request = require('request');
+import { BreedsService } from './cats/breeds.service';
+
+// const request = require('request');
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(
+    private readonly appService: AppService,
+    private readonly breedsService: BreedsService,
+  ) {}
 
   @Get()
   root(): string {
@@ -12,8 +17,9 @@ export class AppController {
   }
 
   @Get('/cats_breeds')
-  async breeds(@Response() response: Response) {
-    request.get('https://catfact.ninja/breeds').pipe(response);
+  async breeds(): Promise<Array<any>> {
+    return this.breedsService.index(100);
+    // request.get('https://catfact.ninja/breeds').pipe(response);
   }
 
   @Get('/docs/cats_breeds')
