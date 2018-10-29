@@ -9,7 +9,7 @@ export interface CatsInterface {
 
 export interface CatsServiceInterface {
   index(): Promise<Array<CatsInterface>>;
-  show(): Promise<CatsInterface>;
+  show(catId: string): Promise<CatsInterface>;
   create(createCatDto: CreateCatsDto): Promise<CatsInterface>;
   update(catId: number, updateCatDto: UpdateCatsDto): Promise<CatsInterface>;
   delete(catId: number): Promise<CatsInterface>;
