@@ -14,10 +14,3 @@ export class Cat extends Model<Cat> {
   @Column
   createdAt: Date;
 }
-
-export const catsProviders = [
-  {
-    provide: 'CatsRepository',
-    useValue: Cat,
-  },
-];
