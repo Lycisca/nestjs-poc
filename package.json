@@ -27,6 +27,7 @@
     "@nestjs/common": "^5.1.0",
     "@nestjs/core": "^5.1.0",
     "@nestjs/swagger": "^2.5.1",
+    "dotenv": "^6.1.0",
     "mysql2": "^1.6.1",
     "reflect-metadata": "^0.1.12",
     "rxjs": "^6.2.2",

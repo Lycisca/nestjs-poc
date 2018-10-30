@@ -7,18 +7,27 @@ import {
   Param,
   Body,
   UsePipes,
+  UseGuards,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { User } from './user.entity';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ValidationUser } from '../pipes/validation.pipe';
+import { AuthGuard } from '../guards/auth.guard';
+import { ApiImplicitHeader } from '@nestjs/swagger';
 
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
+  @ApiImplicitHeader({
+    name: 'authorization',
+    description: 'Authorization token',
+    required: true,
+  })
   @Get()
+  @UseGuards(AuthGuard)
   async index(): Promise<User[]> {
     return this.usersService.index();
   }
