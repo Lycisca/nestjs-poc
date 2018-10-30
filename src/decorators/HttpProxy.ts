@@ -1,42 +1,42 @@
 const axios = require('axios');
+import { Query } from '@nestjs/common';
 
-export const HttpProxy = url => (target, name, descriptor) => {
-  const original = descriptor.value;
-  descriptor.value = function(...args) {
-    console.log('Estos son los argumentos', args);
+class HttpProxyController {
+  constructor(
+    private originalFnc,
+    private url,
+    private headers = {},
+    private params = {},
+  ) {}
+
+  perform(@Query() query) {
+    const url = this.url;
+    const headers = this.headers;
+    const params = this.params;
     console.log('HttpProxy to: ', url);
-    original.apply(this, args);
+    // this.originalFnc.apply(this, args);
     return new Promise((resolve, reject) => {
-      console.log(args[0]);
       axios
-        .get(url, { params: args[0] })
+        .get(url, { params: { ...query, ...params }, headers })
         .then(response => {
           resolve(response.data);
         })
         .catch(reject);
     });
-  };
+  }
+}
+
+// url: url to fetch json
+// params: params merged with query arguments
+// headers: custom headers
+export const HttpProxy = (url: string, params: any = {}, headers: any = {}) => (
+  target,
+  name,
+  descriptor,
+) => {
+  const original = descriptor.value;
+  const proxy = new HttpProxyController(original, url);
+  descriptor.value = descriptor.value = proxy.perform.bind(proxy);
 
   return descriptor;
 };
-
-// TEST
-// class Dummy {
-//   @HttpProxy('https://catfact.ninja/breeds')
-//   perform() {}
-// }
-
-// // @ts-ignore
-// const r: Promise<any> = new Dummy().perform();
-// r.then(response => {
-//   console.log(response);
-// });
-
-// (async () => {
-//   const response = await axios.get('https://catfact.ninja/breeds', {
-//     params: {
-//       limit: 2,
-//     },
-//   });
-//   console.log(response.data);
-// })();
