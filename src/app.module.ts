@@ -5,8 +5,9 @@ import { UsersModule } from './users/users.module';
 import { BreedsService } from './cats/breeds.service';
 const axios = require('axios');
 
+import { CatsModule } from './cats/cats.module';
 @Module({
-  imports: [UsersModule],
+  imports: [UsersModule, CatsModule],
   controllers: [AppController],
   providers: [
     AppService,

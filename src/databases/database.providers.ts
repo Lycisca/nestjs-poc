@@ -1,6 +1,7 @@
 import { Sequelize } from 'sequelize-typescript';
 import { User } from '../users/user.entity';
-import DatabaseConfig from '../../config/database.js';
+import { Cat } from '../cats/cat.entity';
+import DatabaseConfig from '../config/database';
 
 const env = process.env.NODE_ENV || 'development';
 export const databaseProviders = [
@@ -9,7 +10,7 @@ export const databaseProviders = [
     useFactory: () => {
       const databaseConfig = DatabaseConfig[env];
       const sequelize = new Sequelize(databaseConfig);
-      sequelize.addModels([User]);
+      sequelize.addModels([User, Cat]);
       // await sequelize.sync(); // Don't create tables to start application
       return sequelize;
     },

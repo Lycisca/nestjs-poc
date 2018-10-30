@@ -1,6 +1,6 @@
 import { ApiModelProperty } from '@nestjs/swagger';
 
-export class UpdateCatsDto {
+export class CreateCatDto {
   @ApiModelProperty()
   readonly name: string;
   @ApiModelProperty()

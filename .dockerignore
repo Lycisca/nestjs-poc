@@ -1,7 +1,8 @@
+volumes
 node_modules
 dist
 volumes
 /coverage/*
-!/coverage/badge.svg
-junit.xml
-.env
+.vscode
+.git
+Dockerfile

@@ -1,3 +1,4 @@
+/* tslint:disable */
 const fs = require('fs');
 
 const config = {
