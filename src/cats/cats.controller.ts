@@ -6,10 +6,7 @@ import {
   Put,
   Param,
   Body,
-  UsePipes,
 } from '@nestjs/common';
-// import { CatsService } from './cats.service';
-// import { Cat } from './cat.entity';
 import { CreateCatDto } from './dto/create-cat.dto';
 import { UpdateCatDto } from './dto/update-cat-dto';
 import { CatsServiceInterface } from './cats.interface';
