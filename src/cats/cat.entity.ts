@@ -1,5 +1,4 @@
 import { Table, Column, Model } from 'sequelize-typescript';
-import { CatsInterface } from './cats.interface';
 
 @Table
 export class Cat extends Model<Cat> {
