@@ -9,6 +9,7 @@ export class AuthGuard implements CanActivate {
   }
 
   validateRequest(request) {
-    return request.headers['authorization'] == process.env.API_TOKEN;
+    const key = 'authorization';
+    return request.headers[key] == process.env.API_TOKEN;
   }
 }
