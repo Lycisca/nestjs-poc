@@ -2,6 +2,7 @@ const axios = require('axios');
 // url: Url to fetch json
 // params: Params merged with query arguments, query from request low priority
 // headers: Custom headers
+// tslint:disable
 export const HttpProxy = (
   url: string,
   options: { params?: any; headers?: any } = {},

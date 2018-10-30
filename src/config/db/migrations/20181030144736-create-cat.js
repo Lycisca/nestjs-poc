@@ -1,3 +1,4 @@
+/* tslint:disable */
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
