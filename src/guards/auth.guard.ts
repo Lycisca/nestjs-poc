@@ -1,5 +1,4 @@
 import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
-require('dotenv').config();
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -10,6 +9,8 @@ export class AuthGuard implements CanActivate {
 
   validateRequest(request) {
     const key = 'authorization';
-    return request.headers[key] == process.env.API_TOKEN;
+    return (
+      request.headers[key] && request.headers[key] == process.env.API_TOKEN
+    );
   }
 }
