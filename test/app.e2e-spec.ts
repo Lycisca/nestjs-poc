@@ -2,6 +2,8 @@ import { INestApplication } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
 import * as request from 'supertest';
 import { AppModule } from './../src/app.module';
+const dotenv = require('dotenv');
+dotenv.config({ path: '.env.test' });
 
 const createApp = async () => {
   let app: INestApplication;
@@ -48,16 +50,27 @@ describe('AppController (e2e)', () => {
       });
   });
 
-  it('GET index /users', async () => {
-    const { body } = await request(app.getHttpServer())
+  it('GET index /users without headers', async () => {
+    await request(app.getHttpServer())
       .get('/users')
+      .expect(403)
+      .expect({
+        error: 'Forbidden',
+        message: 'Forbidden resource',
+        statusCode: 403,
+      });
+  });
+
+  it('GET index /users with headers', async () => {
+    await request(app.getHttpServer())
+      .get('/users')
+      .set('authorization', process.env.API_TOKEN)
       .expect(200);
-    expect(body).toBeInstanceOf(Array);
   });
 
   describe('GET show', () => {
-    it('/users/user-name', () => {
-      return request(app.getHttpServer())
+    it('/users/user-name', async () => {
+      await request(app.getHttpServer())
         .get('/users/user-name')
         .expect(400)
         .expect({
