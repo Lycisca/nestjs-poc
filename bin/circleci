@@ -1,4 +1,4 @@
 #!/bin/bash
-# docker run --rm -v $(pwd):/data circleci/circleci-cli:alpine config validate /data/.circleci/config.yml
+docker run --rm -v $(pwd):/data circleci/circleci-cli:alpine config validate /data/.circleci/config.yml
 # Propagate all arguments to docker image
-docker run --rm -v $(pwd):/data -w /data circleci/circleci-cli:alpine $@
+# docker run --rm -v $(pwd):/data -w /data circleci/circleci-cli:alpine $@
