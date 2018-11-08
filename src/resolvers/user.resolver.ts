@@ -5,8 +5,9 @@ import {
   ResolveProperty,
   Args,
   Parent,
+  Context,
 } from '@nestjs/graphql';
-
+import { UserInputError, AuthenticationError } from 'apollo-server-express';
 import { UsersService } from '../users/users.service';
 
 @Resolver('User')
@@ -19,7 +20,13 @@ export class UserResolver {
   }
 
   @Mutation('createUser')
-  async createUser(@Args() { input }) {
+  async createUser(@Args() { input }, @Context() context) {
+    if (context.scope !== 'ADMIN') throw new AuthenticationError('not admin');
+    if (input.firstName == 'error') {
+      throw new UserInputError('Form Arguments invalid', {
+        customError: { email: 'Email is already taken' },
+      });
+    }
     return await this.usersService.create(input);
   }
 

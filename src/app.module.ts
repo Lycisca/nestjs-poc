@@ -12,11 +12,19 @@ import { usersProviders } from './users/users.providers';
 
 const axios = require('axios');
 
+const getScope = headers => {
+  // console.log(headers);
+  return 'ADMIN';
+};
 @Module({
   imports: [
     UsersModule,
     CatsModule,
     GraphQLModule.forRoot({
+      context: ({ req }) => {
+        return { scope: getScope(req.headers) };
+      },
+      mocks: false,
       typePaths: ['./**/*.graphql'],
     }),
   ],
