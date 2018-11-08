@@ -23,6 +23,12 @@ export class UserResolver {
     return await this.usersService.create(input);
   }
 
+  @Mutation('updateUser')
+  async updateUser(@Args() { input, id }) {
+    console.log(id);
+    return await this.usersService.update(id, input);
+  }
+
   // @ResolveProperty('posts')
   // async getPosts(@Parent() author) {
   //   const { id } = author;

@@ -8,11 +8,17 @@ type Query {
   user(id: ID!): User
 }
 
-input CreateUserInput {
+input UserCreateInput {
   firstName: String!
   lastName: String
 }
 
+input UserUpdateInput {
+  firstName: String
+  lastName: String
+}
+
 type Mutation {
-  createUser(input: CreateUserInput): User
+  createUser(input: UserCreateInput): User
+  updateUser(id: ID!, input: UserUpdateInput): User
 }
