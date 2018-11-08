@@ -1,6 +1,7 @@
 import {
   Resolver,
   Query,
+  Mutation,
   ResolveProperty,
   Args,
   Parent,
@@ -15,6 +16,11 @@ export class UserResolver {
   @Query('user')
   async user(@Args('id') id: number) {
     return this.usersService.show(id);
+  }
+
+  @Mutation('createUser')
+  async createUser(@Args() { input }) {
+    return await this.usersService.create(input);
   }
 
   // @ResolveProperty('posts')

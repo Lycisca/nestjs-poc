@@ -7,3 +7,12 @@ type User {
 type Query {
   user(id: ID!): User
 }
+
+input CreateUserInput {
+  firstName: String!
+  lastName: String
+}
+
+type Mutation {
+  createUser(input: CreateUserInput): User
+}
