@@ -1,6 +1,7 @@
 node_modules
 dist
 volumes
+/db
 /coverage/*
 !/coverage/badge.svg
 junit.xml

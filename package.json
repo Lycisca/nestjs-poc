@@ -8,7 +8,7 @@
     "console": "ts-node bin/console.ts",
     "format": "prettier --write \"src/**/*.ts\"",
     "start": "ts-node -r tsconfig-paths/register src/main.ts",
-    "db:test:reset": "(export NODE_ENV=test; sequelize db:create && sequelize db:drop && sequelize db:create && sequelize db:migrate)",
+    "db:test:reset": "(export NODE_ENV=test; rm -fr db/* && sequelize db:migrate)",
     "db:reset": "sequelize db:create && sequelize db:drop && sequelize db:create && sequelize db:migrate && npm run db:test:reset",
     "start:dev": "nodemon",
     "start:debug": "nodemon --config nodemon-debug.json",
@@ -36,6 +36,7 @@
     "sequelize": "^4.41.0",
     "sequelize-cli": "^5.2.0",
     "sequelize-typescript": "^0.6.6",
+    "sqlite3": "^4.0.3",
     "typescript": "^3.0.1"
   },
   "devDependencies": {
