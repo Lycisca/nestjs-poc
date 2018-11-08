@@ -19,12 +19,10 @@ const config = {
     }
   },
   test: {
-    dialect: "mysql",
-    username: "root",
-    password: "password",
-    database: "database_test",
-    host: process.env.DB_HOSTNAME || "127.0.0.1",
-    port: 3306,
+    dialect: "sqlite",
+    // the storage engine for sqlite
+    // - default ':memory:'
+    storage: 'db/database.sqlite',
     define: {
       // underscored: false
       charset: 'utf8',
