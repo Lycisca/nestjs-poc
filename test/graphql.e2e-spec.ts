@@ -77,7 +77,6 @@ describe('AppController (e2e)', () => {
       }`,
       { id: user.id },
     );
-    console.log('USER', data);
-    // expect(data.user).toHaveProperty('id');
+    expect(data.user).toHaveProperty('id');
   });
 });
