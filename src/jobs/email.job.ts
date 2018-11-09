@@ -1,5 +1,4 @@
-import { Job } from './queue.provider';
-
-Job.process('email', function(job, done) {
+export const emailProcess = function(job, done) {
+  console.log('Send email', job.data);
   done();
-});
+};
