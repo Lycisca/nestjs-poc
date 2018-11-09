@@ -4,8 +4,8 @@ type Query {
 }
 
 type Mutation {
-  userCreate(input: UserCreateInput): User
-  userUpdate(id: ID!, input: UserUpdateInput): User
+  userCreate(input: UserCreateInput!): User
+  userUpdate(id: ID!, input: UserUpdateInput!): User
   userDelete(id: ID!): User
 }
 
