@@ -1,6 +1,7 @@
-import { Job } from './queue.provider';
+import { kueInit } from './queue.provider';
 import './email.job';
 
+const Job = kueInit();
 const job = new Promise((resolve, reject) => {
   const job = Job.create('email', {
     title: 'welcome email for tj',

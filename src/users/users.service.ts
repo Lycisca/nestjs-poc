@@ -2,6 +2,9 @@ import { Injectable, Inject } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './user.entity';
+import { kueInit } from '../jobs/queue.provider';
+
+const Job = kueInit();
 
 @Injectable()
 export class UsersService {
@@ -23,7 +26,7 @@ export class UsersService {
     const user = new User();
     user.firstName = createUserDto.firstName;
     user.lastName = createUserDto.lastName;
-
+    Job.create('email', { to: 'example@example.com' }).save();
     return await user.save();
   }
 
