@@ -2,17 +2,14 @@ import { Injectable, Inject } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './user.entity';
-import { kueInit } from '../jobs/queue.provider';
-
-const Job = kueInit();
+import { EmailJob } from '../jobs/email.job';
 
 @Injectable()
 export class UsersService {
   constructor(
-    // Propoerty-based inyection
+    @Inject('jobProvider') private readonly jobProvider,
     @Inject('UsersRepository') private readonly usersRepository: typeof User,
   ) {}
-  // private readonly userService: User) {}
 
   async index(): Promise<User[]> {
     return await this.usersRepository.findAll<User>();
@@ -26,7 +23,7 @@ export class UsersService {
     const user = new User();
     user.firstName = createUserDto.firstName;
     user.lastName = createUserDto.lastName;
-    Job.create('email', { to: 'example@example.com' }).save();
+    new EmailJob(this.jobProvider).performLater({ to: 'example@example.com' });
     return await user.save();
   }
 

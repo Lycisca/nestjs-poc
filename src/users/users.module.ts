@@ -3,11 +3,11 @@ import { UsersController } from './users.controller';
 import { UsersService } from './users.service';
 import { usersProviders } from './users.providers';
 import { DatabaseModule } from '../databases/database.module';
-import { kueInit } from '../jobs/queue.provider';
+import { jobProvider } from '../jobs/queue.provider';
 
 @Module({
   controllers: [UsersController],
-  providers: [UsersService, ...usersProviders],
+  providers: [UsersService, ...usersProviders, jobProvider],
   imports: [DatabaseModule],
   exports: [],
 })
