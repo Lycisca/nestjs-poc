@@ -1,5 +1,5 @@
 /* tslint:disable */
-const fs = require('fs');
+import fs from 'fs';
 import { ISequelizeConfig } from 'sequelize-typescript';
 
 interface DatabaseConfig {
@@ -63,5 +63,5 @@ const config: DatabaseConfig = {
   },
 };
 module.exports = config;
-
 module.exports.default = config;
+export default config;
