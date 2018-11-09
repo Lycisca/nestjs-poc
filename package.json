@@ -33,6 +33,7 @@
     "dotenv": "^6.1.0",
     "graphql": "^14.0.2",
     "graphql-tools": "^4.0.3",
+    "kue": "^0.11.6",
     "mysql2": "^1.6.1",
     "reflect-metadata": "^0.1.12",
     "request": "^2.88.0",
