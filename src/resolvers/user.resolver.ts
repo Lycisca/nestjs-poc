@@ -19,8 +19,13 @@ export class UserResolver {
     return this.usersService.show(id);
   }
 
-  @Mutation('createUser')
-  async createUser(@Args() { input }, @Context() context) {
+  @Query('users')
+  async users() {
+    return this.usersService.index();
+  }
+
+  @Mutation('userCreate')
+  async userCreate(@Args() { input }, @Context() context) {
     if (context.scope !== 'ADMIN') throw new AuthenticationError('not admin');
     if (input.firstName == 'error') {
       throw new UserInputError('Form Arguments invalid', {
@@ -30,10 +35,14 @@ export class UserResolver {
     return await this.usersService.create(input);
   }
 
-  @Mutation('updateUser')
-  async updateUser(@Args() { input, id }) {
-    console.log(id);
+  @Mutation('userUpdate')
+  async userUpdate(@Args() { input, id }) {
     return await this.usersService.update(id, input);
+  }
+
+  @Mutation('userDelete')
+  async userDelete(@Args() { id }) {
+    return await this.usersService.destroy(id);
   }
 
   // @ResolveProperty('posts')
