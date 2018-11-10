@@ -1,5 +1,9 @@
 {
   "compilerOptions": {
+    "lib": [
+      "es2018",
+      "esnext.asynciterable"
+    ],
     "module": "commonjs",
     "allowJs": true,
     "declaration": false,
