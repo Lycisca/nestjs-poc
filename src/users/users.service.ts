@@ -3,11 +3,12 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './user.entity';
 import { EmailJob } from '../jobs/email.job';
+import { JobProvider } from '../jobs/application.job';
 
 @Injectable()
 export class UsersService {
   constructor(
-    @Inject('jobProvider') private readonly jobProvider,
+    @Inject('jobProvider') private readonly jobProvider: JobProvider,
     @Inject('UsersRepository') private readonly usersRepository: typeof User,
   ) {}
 

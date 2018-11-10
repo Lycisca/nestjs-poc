@@ -1,8 +1,12 @@
+export class JobProvider {
+  create: (...args: any[]) => { save: () => {} };
+  process: (...args: any[]) => {};
+}
 export class ApplicationJob {
   // event name
   event: string;
 
-  constructor(public readonly jobProvider) {
+  constructor(public readonly jobProvider: JobProvider) {
     this.event = this.constructor.name;
   }
 
