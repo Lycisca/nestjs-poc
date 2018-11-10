@@ -33,9 +33,6 @@ jobs: # a collection of steps
       - run:
           name: Unit test
           command: npm test
-      - run:
-          name: End to end test
-          command: npm run test:e2e
       - store_artifacts:
           path: coverage
           prefix: coverage
@@ -44,6 +41,21 @@ jobs: # a collection of steps
           command: mkdir -p test-results/jest && cp junit.xml test-results/jest/results.xml
       - store_test_results: # special step to upload test results for display in Test Summary
           path: test-results
+  test_e2e:
+    docker:
+      - image: circleci/buildpack-deps
+    working_directory: ~/nestjs-poc # directory where steps will run
+    steps:
+      - checkout # special step to check out source code to working directory
+      - run:
+          name: Prepare test suite
+          command: docker-compose up -d
+      - run:
+          name: Setup database
+          command: docker-compose run --rm worker npm run db:test:reset
+      - run:
+          name: End to end test
+          command: docker-compose run --rm worker npm run test:e2e
   production_build:
     machine: true
     # docker:
@@ -63,5 +75,6 @@ workflows:
   build_and_test:
     jobs:
       - test
+      - test_e2e
       - production_build
 # try caching layers
