@@ -27,11 +27,6 @@ const config = {
   },
   test: {
     dialect: 'sqlite',
-    // key not need for sqlite
-    database: 'database_test',
-    username: 'root',
-    password: 'password',
-    // key not need for sqlite
     // the storage engine for sqlite
     // - default ':memory:'
     storage: 'db/database.sqlite',
