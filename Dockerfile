@@ -16,6 +16,7 @@ ENV NODE_ENV=production
 WORKDIR /app
 COPY --from=builder /app/node_modules /app/node_modules
 COPY --from=builder /app/package.json /app/package.json
+COPY --from=builder /app/schema.graphql /app/schema.graphql
 COPY --from=builder /app/dist /app/dist
 
 CMD ["npm", "run", "start:prod"]
