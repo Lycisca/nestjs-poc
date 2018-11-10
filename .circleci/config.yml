@@ -45,6 +45,8 @@ jobs: # a collection of steps
     machine: true
     steps:
       - checkout # special step to check out source code to working directory
+      - setup_remote_docker:
+          docker_layer_caching: true
       - run:
           name: Docker build production image
           command: docker build -t nestpoc .
