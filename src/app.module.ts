@@ -25,7 +25,7 @@ const getScope = headers => {
         return { scope: getScope(req.headers) };
       },
       mocks: false,
-      typePaths: ['./**/*.graphql'],
+      typePaths: ['../schema.graphql'],
     }),
   ],
   controllers: [AppController],
