@@ -9,9 +9,18 @@ jobs: # a collection of steps
     #   - image: mongo:3.4.4 # and this image as the secondary service container
     steps: # a collection of executable commands
       - checkout # special step to check out source code to working directory
+      # - run:
+      #     name: update-npm
+      #     command: 'sudo npm install -g npm@latest'
+      - restore_cache: # special step to restore the dependency cache
+          key: dependency-cache-{{ checksum "package-lock.json" }}
       - run:
           name: Install npm packages
           command: npm ci
+      - save_cache: # special step to save the dependency cache
+          key: dependency-cache-{{ checksum "package-lock.json" }}
+          paths:
+            - ./node_modules
       - run:
           name: Jest version
           command: npx jest --version
@@ -41,6 +50,9 @@ jobs: # a collection of steps
       - image: circleci/redis
     steps:
       - checkout # special step to check out source code to working directory
+      - run:
+          name: Install npm packages
+          command: npm ci
       - run:
           name: Setup database
           command: npm run db:test:reset
