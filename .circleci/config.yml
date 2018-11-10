@@ -13,17 +13,20 @@ jobs: # a collection of steps
       #     name: update-npm
       #     command: 'sudo npm install -g npm@latest'
       - restore_cache: # special step to restore the dependency cache
-          key: dependency-cache-{{ checksum "package.json" }}
+          key: dependency-cache-{{ checksum "package-lock.json" }}
       - run:
           name: Install npm packages
-          command: sudo npm ci
+          command: npm ci
       - save_cache: # special step to save the dependency cache
-          key: dependency-cache-{{ checksum "package.json" }}
+          key: dependency-cache-{{ checksum "package-lock.json" }}
           paths:
             - ./node_modules
       - run:
+          name: Jest version
+          command: npx jest --version
+      - run:
           name: Linter
-          command: sudo npm run lint
+          command: npm run lint
       - run:
           name: Setup database
           command: NODE_ENV=test npx sequelize db:migrate
