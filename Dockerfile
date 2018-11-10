@@ -6,7 +6,7 @@ WORKDIR /app
 COPY package.json package-lock.json /app/
 RUN npm ci
 COPY . .
-# RUN npm run build:prod
+RUN npm run build:prod
 
 # ======== Multi stage ==========
 FROM node:10.12.0-alpine
