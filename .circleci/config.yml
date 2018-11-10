@@ -42,13 +42,14 @@ jobs: # a collection of steps
       - store_test_results: # special step to upload test results for display in Test Summary
           path: test-results
   production_build:
-    docker:
-      - image: circleci/golang # (1)
-    working_directory: ~/nestjs-poc # directory where steps will run
+    machine: true
+    # docker:
+    #   - image: circleci/golang # (1)
+    # working_directory: ~/nestjs-poc # directory where steps will run
     steps:
       - checkout # special step to check out source code to working directory
-      - setup_remote_docker:
-          docker_layer_caching: true
+      #   - setup_remote_docker:
+      #       docker_layer_caching: true
       - run:
           name: Docker build production image
           command: docker build -t nestpoc .
