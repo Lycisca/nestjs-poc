@@ -13,26 +13,26 @@ jobs: # a collection of steps
       #     name: update-npm
       #     command: 'sudo npm install -g npm@latest'
       - restore_cache: # special step to restore the dependency cache
-          key: dependency-cache-{{ checksum "package.json" }}
+          key: dependency-cache-{{ checksum "package-lock.json" }}
       - run:
           name: Install npm packages
-          command: sudo npm ci
+          command: npm ci
       - save_cache: # special step to save the dependency cache
-          key: dependency-cache-{{ checksum "package.json" }}
+          key: dependency-cache-{{ checksum "package-lock.json" }}
           paths:
             - ./node_modules
       - run:
+          name: Jest version
+          command: npx jest --version
+      - run:
           name: Linter
-          command: sudo npm run lint
+          command: npm run lint
       - run:
           name: Setup database
           command: NODE_ENV=test npx sequelize db:migrate
       - run:
           name: Unit test
           command: npm test
-      - run:
-          name: End to end test
-          command: npm run test:e2e
       - store_artifacts:
           path: coverage
           prefix: coverage
@@ -41,6 +41,24 @@ jobs: # a collection of steps
           command: mkdir -p test-results/jest && cp junit.xml test-results/jest/results.xml
       - store_test_results: # special step to upload test results for display in Test Summary
           path: test-results
+  test_e2e:
+    working_directory: ~/nestjs-poc # directory where steps will run
+    docker: # run the steps with Docker
+      - image: circleci/node:10.12.0 # ...with this image as the primary container; this is where all `steps` will run
+        environment:
+          NODE_ENV: test
+      - image: circleci/redis
+    steps:
+      - checkout # special step to check out source code to working directory
+      - run:
+          name: Install npm packages
+          command: npm ci
+      - run:
+          name: Setup database
+          command: npm run db:test:reset
+      - run:
+          name: End to end test
+          command: npm run test:e2e
   production_build:
     machine: true
     # docker:
@@ -60,5 +78,6 @@ workflows:
   build_and_test:
     jobs:
       - test
+      - test_e2e
       - production_build
 # try caching layers
