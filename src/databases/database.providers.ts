@@ -15,6 +15,6 @@ export const sequelizeInit = () => {
 export const databaseProviders = [
   {
     provide: 'SequelizeToken',
-    useFactory: () => sequelizeInit,
+    useFactory: () => sequelizeInit(),
   },
 ];
