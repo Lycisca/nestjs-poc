@@ -1,8 +1,6 @@
 /* tslint:disable */
 import fs from 'fs';
-import {
-  ISequelizeConfig
-} from 'sequelize-typescript';
+import { ISequelizeConfig } from 'sequelize-typescript';
 
 interface DatabaseConfig {
   development: ISequelizeConfig;
