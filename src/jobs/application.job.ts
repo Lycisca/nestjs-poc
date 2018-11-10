@@ -1,4 +1,4 @@
-import { Job, Queue } from 'kue';
+import { Job } from 'kue';
 export class JobProvider {
   create(...args: any[]) {
     const saveFunction = () => ({
@@ -13,7 +13,7 @@ export class ApplicationJob {
   // event name
   event: string;
 
-  constructor(public readonly jobProvider: Queue) {
+  constructor(public readonly jobProvider: JobProvider) {
     this.event = this.constructor.name;
   }
 
@@ -24,11 +24,12 @@ export class ApplicationJob {
 
   performNow(data) {
     return new Promise((resolve, reject) => {
-      const job: Job = this.jobProvider.create(this.event, data).save();
+      const job = this.jobProvider.create(this.event, data).save();
       job
         .on('complete', result => {
           resolve(result);
         })
+        // @ts-ignore
         .on('failed attempt', (errorMessage, doneAttempts) => {
           reject({ errorMessage, doneAttempts });
         })
