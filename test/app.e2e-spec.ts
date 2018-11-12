@@ -2,6 +2,7 @@ import { INestApplication } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
 import * as request from 'supertest';
 import { AppModule } from './../src/app.module';
+import { kueInit } from '../src/jobs/queue.provider';
 const dotenv = require('dotenv');
 dotenv.config({ path: '.env.test' });
 
@@ -106,5 +107,12 @@ describe('AppController (e2e)', () => {
       .delete(`/users/${body.id}`)
       .set('Accept', 'application/json')
       .expect(200);
+  });
+});
+
+afterAll(() => {
+  const Job = kueInit();
+  Job.shutdown(5000, function(err) {
+    console.log('Kue shutdown: ', err || '');
   });
 });

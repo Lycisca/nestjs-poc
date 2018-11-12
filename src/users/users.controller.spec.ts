@@ -3,6 +3,7 @@ import { UsersController } from './users.controller';
 import { UsersService } from './users.service';
 import { usersProviders } from './users.providers';
 import { DatabaseModule } from '../databases/database.module';
+import { JobProvider } from '../jobs/application.job';
 
 describe('UsersController', () => {
   let usersController: UsersController;
@@ -11,7 +12,16 @@ describe('UsersController', () => {
   beforeEach(async () => {
     const module = await Test.createTestingModule({
       controllers: [UsersController],
-      providers: [UsersService, ...usersProviders],
+      providers: [
+        UsersService,
+        ...usersProviders,
+        {
+          provide: 'jobProvider',
+          useFactory: () => {
+            new JobProvider();
+          },
+        },
+      ],
       imports: [DatabaseModule],
       exports: [],
     }).compile();

@@ -9,6 +9,7 @@ import { CatsModule } from './cats/cats.module';
 import { UsersService } from './users/users.service';
 import { DatabaseModule } from './databases/database.module';
 import { usersProviders } from './users/users.providers';
+import { jobProvider } from './jobs/queue.provider';
 
 const axios = require('axios');
 
@@ -34,6 +35,7 @@ const getScope = headers => {
     UserResolver,
     UsersService,
     ...usersProviders,
+    jobProvider,
     {
       provide: 'BreedsService',
       useValue: new BreedsService(axios),

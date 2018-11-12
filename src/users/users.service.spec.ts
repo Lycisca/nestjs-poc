@@ -2,8 +2,9 @@ import { IFindOptions, Model } from 'sequelize-typescript';
 import { UsersService } from './users.service';
 import { databaseProviders } from '../databases/database.providers';
 import { User } from './user.entity';
+import { JobProvider } from '../jobs/application.job';
 
-class UserMock extends User {
+class UserMock {
   static findAll<T extends Model<T>>(
     this: new () => T,
     options?: IFindOptions<T>,
@@ -12,9 +13,9 @@ class UserMock extends User {
   }
 }
 
-const usersServiceFactory = UserRepository => {
+const usersServiceFactory = repo => {
   databaseProviders[0].useFactory();
-  return new UsersService(UserRepository);
+  return new UsersService(new JobProvider(), repo);
 };
 
 describe('Users Service', () => {
@@ -26,8 +27,7 @@ describe('Users Service', () => {
   });
 
   it('test interface', async () => {
-    const repo: typeof User = UserMock;
-    const usersService = usersServiceFactory(repo);
+    const usersService = usersServiceFactory(UserMock);
     const users = await usersService.index();
     expect(users).toEqual([{ firstName: 'user' }]);
   });
