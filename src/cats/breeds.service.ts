@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { AxiosInstance, AxiosStatic } from 'axios';
 
 export interface Breed {
   breed: string;
@@ -7,18 +8,20 @@ export interface Breed {
   coat: string;
   pattern: string;
 }
-export interface Requester {
-  get: (url: string) => Promise<{ data: { data: Breed[] } }>;
-}
 
 // https://catfact.ninja/#!/Breeds/breed
 @Injectable()
 export class BreedsService {
-  constructor(private readonly requester: Requester) {}
-  async index(limit: number = 100): Promise<Breed[]> {
-    const { data } = await this.requester.get(
-      `https://catfact.ninja/breeds?limit=${limit}`,
-    );
+  request: AxiosInstance;
+  constructor(requester: AxiosStatic) {
+    this.request = requester.create({
+      baseURL: 'https://catfact.ninja/breeds',
+      timeout: 1000,
+      headers: { 'X-Custom-Header': 'foobar' },
+    });
+  }
+  async index(params = { limit: 100 }): Promise<Breed[]> {
+    const { data } = await this.request.get(`/breeds`, { params });
     return data.data;
   }
 }
