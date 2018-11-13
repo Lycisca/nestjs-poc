@@ -15,6 +15,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ValidationUser } from '../pipes/validation.pipe';
 import { AuthGuard } from '../guards/auth.guard';
+import { JwtAuthGuard } from '../auth/auth.guard';
 import { ApiImplicitHeader } from '@nestjs/swagger';
 
 @Controller('users')
@@ -33,7 +34,8 @@ export class UsersController {
   }
 
   @Get(':id')
-  @UsePipes(new ValidationUser())
+  @UseGuards(JwtAuthGuard)
+  // @UsePipes(new ValidationUser())
   async show(@Param('id') userId: number) {
     return this.usersService.show(userId);
   }
