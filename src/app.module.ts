@@ -10,10 +10,8 @@ import { UsersService } from './users/users.service';
 import { DatabaseModule } from './databases/database.module';
 import { usersProviders } from './users/users.providers';
 import { jobProvider } from './jobs/queue.provider';
-import { JwtModule } from '@nestjs/jwt';
-import { AuthService } from './auth/auth.service';
-import { JwtStrategy } from './auth/jwt.strategy';
-import { PassportModule } from '@nestjs/passport';
+import { JwtAuthService } from './auth/jwtAuth.service';
+import { JwtAuthGuard } from './auth/auth.guard';
 
 const axios = require('axios');
 
@@ -26,13 +24,6 @@ const getScope = headers => {
   imports: [
     UsersModule,
     CatsModule,
-    PassportModule.register({ defaultStrategy: 'jwt' }),
-    JwtModule.register({
-      secretOrPrivateKey: 'secretKey',
-      signOptions: {
-        expiresIn: 3600,
-      },
-    }),
     GraphQLModule.forRoot({
       context: ({ req }) => {
         return { scope: getScope(req.headers) };
@@ -47,8 +38,8 @@ const getScope = headers => {
     UserResolver,
     UsersService,
     ...usersProviders,
-    AuthService,
-    JwtStrategy,
+    JwtAuthService,
+    JwtAuthGuard,
     jobProvider,
     {
       provide: 'BreedsService',

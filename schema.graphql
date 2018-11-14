@@ -18,6 +18,8 @@ type User {
 }
 
 input UserCreateInput {
+  email: String!
+  password: String!
   firstName: String!
   lastName: String
 }

@@ -13,7 +13,7 @@ export class UsersService {
   ) {}
 
   async findOneByEmail(email: string): Promise<User> {
-    return await this.usersRepository.findOne({ where: { firstName: email } });
+    return await this.usersRepository.findOne({ where: { email } });
   }
 
   async index(): Promise<User[]> {
@@ -25,11 +25,9 @@ export class UsersService {
   }
 
   async create(createUserDto: CreateUserDto): Promise<User> {
-    const user = new User();
-    user.firstName = createUserDto.firstName;
-    user.lastName = createUserDto.lastName;
+    const user = await User.create(createUserDto);
     new EmailJob(this.jobProvider).performLater({ to: 'example@example.com' });
-    return await user.save();
+    return await user;
   }
 
   async update(userId: number, updateUserDto: UpdateUserDto): Promise<User> {
