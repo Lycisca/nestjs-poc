@@ -29,12 +29,11 @@ const graphqlRequest = async (app, query, variables = {}) => {
   return body;
 };
 
-const sequelize = sequelizeInit();
-
-const truncateAll = sequelize => {
-  Object.values(sequelize.models).map((model: any) =>
-    model.destroy({ where: {}, truncate: true }),
-  );
+const truncateAll = async sequelize => {
+  Object.keys(sequelize.models).map((key: any) => {
+    const model = sequelize.models[key];
+    model.destroy({ where: {}, truncate: true });
+  });
 };
 
 const createUserByHttp = async (app, userFixture = undefined) => {
@@ -54,6 +53,7 @@ describe('AppController (e2e)', () => {
   let app: INestApplication;
 
   beforeAll(async () => {
+    const sequelize = await sequelizeInit();
     truncateAll(sequelize);
     app = await createApp();
   });
