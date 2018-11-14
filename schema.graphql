@@ -1,5 +1,6 @@
 type Query {
   user(id: ID!): User
+  login(email: String!, password: String!): String
   users: [User]
 }
 
