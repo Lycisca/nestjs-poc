@@ -26,10 +26,10 @@ export class AppController {
   }
 
   @Get('/cats_breeds')
-  @HttpProxy('https://catfact.ninja/breeds')
+  // @HttpProxy('https://catfact.ninja/breeds')
   // @ts-ignore
   async breeds(@Query() query: number): Promise<Array<any>> {
-    // return this.breedsService.index(100);
+    return this.breedsService.index(100);
     // request.get('https://catfact.ninja/breeds').pipe(response);
   }
 

@@ -14,11 +14,20 @@ export interface Requester {
 // https://catfact.ninja/#!/Breeds/breed
 @Injectable()
 export class BreedsService {
-  constructor(private readonly requester: Requester) {}
-  async index(limit: number = 100): Promise<Breed[]> {
-    const { data } = await this.requester.get(
-      `https://catfact.ninja/breeds?limit=${limit}`,
+  constructor(
+    private readonly requester: Requester,
+    private readonly redisService,
+  ) {}
+
+  async index(limit: number = 1000): Promise<Array<Breed>> {
+    return await this.redisService.redisFetch(
+      `breeds-${limit}`,
+      new Promise((resolve, reject) => {
+        this.requester
+          .get(`https://catfact.ninja/breeds?limit=${limit}`)
+          .then(({ data }) => resolve(data.data));
+      }),
+      1000,
     );
-    return data.data;
   }
 }

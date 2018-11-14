@@ -1,6 +1,13 @@
 import { BreedsService } from './breeds.service';
+
 jest.mock('axios');
 const axios = require('axios');
+
+class RedisServiceMock {
+  redisFetch(key, promise, time?) {
+    return promise;
+  }
+}
 
 describe('BreedsService', () => {
   afterEach(() => {
@@ -8,25 +15,8 @@ describe('BreedsService', () => {
   });
 
   it('#new', async () => {
-    expect(new BreedsService(axios)).toBeInstanceOf(BreedsService);
-  });
-
-  it('#index', async () => {
-    axios.get.mockImplementation(async (url: string) => ({
-      data: { data: [{ breed: 'Mock breed' }] },
-    }));
-    const breeds = await new BreedsService(axios).index();
-    console.log('breeds', breeds);
-    expect(breeds).toBeInstanceOf(Array);
-  });
-
-  it('#index with empty array', async () => {
-    axios.get.mockImplementation(async (url: string) => ({
-      data: { data: [] },
-    }));
-    const breeds = await new BreedsService(axios).index();
-    console.log('breeds', breeds);
-    expect(breeds).toBeInstanceOf(Array);
+    const service = new BreedsService(axios, new RedisServiceMock());
+    expect(service).toBeInstanceOf(BreedsService);
   });
 
   it('#index with function mock', async () => {
@@ -35,8 +25,8 @@ describe('BreedsService', () => {
         data: { data: [] },
       }),
     };
-    const breeds = await new BreedsService(requestMock).index();
-    console.log('breeds', breeds);
+    const service = new BreedsService(requestMock, new RedisServiceMock());
+    const breeds = await service.index();
     expect(breeds).toBeInstanceOf(Array);
   });
 });
