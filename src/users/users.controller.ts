@@ -5,6 +5,7 @@ import {
   Delete,
   Put,
   Param,
+  Request,
   Body,
   UsePipes,
   UseGuards,
@@ -33,9 +34,14 @@ export class UsersController {
     return this.usersService.index();
   }
 
-  @Get(':id')
+  @Get('me')
   @UseGuards(JwtAuthGuard)
-  // @UsePipes(new ValidationUser())
+  async me(@Request() request) {
+    return request.user;
+  }
+
+  @Get(':id')
+  @UsePipes(new ValidationUser())
   async show(@Param('id') userId: number) {
     return this.usersService.show(userId);
   }

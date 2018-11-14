@@ -13,6 +13,7 @@ export class JwtAuthGuard {
     const token = request.headers.authorization;
     try {
       const user = await this.jwtAuthService.verify(token);
+      request.user = user;
       return true;
     } catch {
       new UnauthorizedException();
