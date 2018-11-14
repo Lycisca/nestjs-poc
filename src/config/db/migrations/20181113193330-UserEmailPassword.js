@@ -1,3 +1,4 @@
+/* tslint:disable */
 'use strict';
 
 // import { QueryInterface, SequelizeStatic } from 'sequelize';
