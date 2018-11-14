@@ -5,7 +5,7 @@ export class RedisService {
   constructor() {
     this.redis = new Redis();
   }
-
+  // time in seconds
   redisFetch(key, promise, time?): Promise<any> {
     return new Promise((resolve, reject) => {
       this.redis.get(key, (err, dataRedis) => {
