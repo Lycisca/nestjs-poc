@@ -28,7 +28,7 @@ export class BreedsService {
     return await this.redisService.redisFetch(
       `breeds-${limit}`,
       new Promise((resolve, reject) => {
-        this.requester
+        this.request
           .get(`https://catfact.ninja/breeds?limit=${limit}`)
           .then(({ data }) => resolve(data.data));
       }),
