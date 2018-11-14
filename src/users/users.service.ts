@@ -12,6 +12,13 @@ export class UsersService {
     @Inject('UsersRepository') private readonly usersRepository: typeof User,
   ) {}
 
+  async findOneByEmailAndPassword(
+    email: string,
+    password: string,
+  ): Promise<User> {
+    return await this.usersRepository.findOne({ where: { email, password } });
+  }
+
   async findOneByEmail(email: string): Promise<User> {
     return await this.usersRepository.findOne({ where: { email } });
   }

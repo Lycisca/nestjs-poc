@@ -15,6 +15,15 @@ export class JwtAuthService {
     });
   }
 
+  async login(email, password): Promise<string> {
+    const user = await this.usersService.findOneByEmailAndPassword(
+      email,
+      password,
+    );
+    if (!user) throw new Error('User not exists');
+    return this.sign(email, password);
+  }
+
   async sign(email, password): Promise<string> {
     return this.jwtService.sign({ email, password });
   }

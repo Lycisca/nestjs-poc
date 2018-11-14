@@ -6,6 +6,7 @@ import {
   Put,
   Param,
   Request,
+  Res,
   Body,
   UsePipes,
   UseGuards,
@@ -18,10 +19,14 @@ import { ValidationUser } from '../pipes/validation.pipe';
 import { AuthGuard } from '../guards/auth.guard';
 import { JwtAuthGuard } from '../auth/auth.guard';
 import { ApiImplicitHeader } from '@nestjs/swagger';
+import { JwtAuthService } from '../auth/jwtAuth.service';
 
 @Controller('users')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(
+    private readonly usersService: UsersService,
+    private readonly jwtAuthService: JwtAuthService,
+  ) {}
 
   @ApiImplicitHeader({
     name: 'authorization',
@@ -32,6 +37,19 @@ export class UsersController {
   @UseGuards(AuthGuard)
   async index(): Promise<User[]> {
     return this.usersService.index();
+  }
+
+  @Post('login')
+  async login(@Body() loginBody, @Res() res) {
+    try {
+      const token = await this.jwtAuthService.login(
+        loginBody.email,
+        loginBody.password,
+      );
+      res.status(200).json({ token });
+    } catch (error) {
+      res.status(401).json({ error: error.message });
+    }
   }
 
   @Get('me')
