@@ -11,6 +11,8 @@ import { DatabaseModule } from './databases/database.module';
 import { usersProviders } from './users/users.providers';
 import { jobProvider } from './jobs/queue.provider';
 import { RedisService } from './cache/redis.service';
+import { JwtAuthService } from './auth/jwtAuth.service';
+import { JwtAuthGuard } from './auth/auth.guard';
 
 const axios = require('axios');
 
@@ -18,6 +20,7 @@ const getScope = headers => {
   // console.log(headers);
   return 'ADMIN';
 };
+
 @Module({
   imports: [
     UsersModule,
@@ -36,6 +39,8 @@ const getScope = headers => {
     UserResolver,
     UsersService,
     ...usersProviders,
+    JwtAuthService,
+    JwtAuthGuard,
     jobProvider,
     {
       provide: 'BreedsService',

@@ -9,14 +9,27 @@ import {
 } from '@nestjs/graphql';
 import { UserInputError, AuthenticationError } from 'apollo-server-express';
 import { UsersService } from '../users/users.service';
+import { JwtAuthService } from '../auth/jwtAuth.service';
 
 @Resolver('User')
 export class UserResolver {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(
+    private readonly usersService: UsersService,
+    private readonly jwtAuthService: JwtAuthService,
+  ) {}
 
   @Query('user')
   async user(@Args('id') id: number) {
     return this.usersService.show(id);
+  }
+
+  @Query('login')
+  async login(
+    @Args('email') email: string,
+    @Args('password') password: string,
+  ) {
+    // graphql rescue all errors
+    return this.jwtAuthService.login(email, password);
   }
 
   @Query('users')

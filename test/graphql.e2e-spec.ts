@@ -37,10 +37,16 @@ const truncateAll = async sequelize => {
 };
 
 const createUserByHttp = async (app, userFixture = undefined) => {
-  const input = userFixture || { firstName: 'John', lastName: 'Doe' };
+  const input = userFixture || {
+    firstName: 'John',
+    lastName: 'Doe',
+    email: 'user@mail.com',
+    password: '12345678',
+  };
   const query = `mutation($input: UserCreateInput!) {
     userCreate(input: $input) {
       id
+      email
       firstName
       lastName
     }

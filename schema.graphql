@@ -1,5 +1,6 @@
 type Query {
   user(id: ID!): User
+  login(email: String!, password: String!): String
   users: [User]
 }
 
@@ -11,11 +12,15 @@ type Mutation {
 
 type User {
   id: ID!
+  email: String
+  password: String
   firstName: String
   lastName: String
 }
 
 input UserCreateInput {
+  email: String!
+  password: String!
   firstName: String!
   lastName: String
 }
