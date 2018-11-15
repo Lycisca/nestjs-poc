@@ -1,9 +1,16 @@
 import { BreedsService } from './breeds.service';
 import axios from 'axios';
 
+class RedisServiceMock {
+  redisFetch(key, promise, time?) {
+    return promise;
+  }
+}
+
 describe('BreedsService', () => {
   it('#new', async () => {
-    expect(new BreedsService(axios)).toBeInstanceOf(BreedsService);
+    const service = new BreedsService(axios, new RedisServiceMock());
+    expect(service).toBeInstanceOf(BreedsService);
   });
 
   it('#index with function mock', async () => {
@@ -14,7 +21,8 @@ describe('BreedsService', () => {
         }),
       }),
     };
-    const breeds = await new BreedsService(requestMock).index();
+    const service = new BreedsService(requestMock, new RedisServiceMock());
+    const breeds = await service.index();
     expect(breeds).toBeInstanceOf(Array);
   });
 });

@@ -13,15 +13,26 @@ export interface Breed {
 @Injectable()
 export class BreedsService {
   request: AxiosInstance;
-  constructor(requester: AxiosStatic) {
+  constructor(
+    private readonly requester: AxiosStatic,
+    private readonly redisService,
+  ) {
     this.request = requester.create({
       baseURL: 'https://catfact.ninja/breeds',
       timeout: 1000,
       headers: { 'X-Custom-Header': 'foobar' },
     });
   }
-  async index(params = { limit: 100 }): Promise<Breed[]> {
-    const { data } = await this.request.get(`/breeds`, { params });
-    return data.data;
+
+  async index(limit: number = 1000): Promise<Array<Breed>> {
+    return await this.redisService.redisFetch(
+      `breeds-${limit}`,
+      new Promise((resolve, reject) => {
+        this.request
+          .get(`https://catfact.ninja/breeds?limit=${limit}`)
+          .then(({ data }) => resolve(data.data));
+      }),
+      1000,
+    );
   }
 }
