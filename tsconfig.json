@@ -1,9 +1,6 @@
 {
   "compilerOptions": {
-    "lib": [
-      "es2018",
-      "esnext.asynciterable"
-    ],
+    "lib": ["dom", "es2018", "esnext.asynciterable"],
     "module": "commonjs",
     "allowJs": true,
     "declaration": false,
@@ -18,11 +15,6 @@
     "outDir": "./dist",
     "baseUrl": "./src"
   },
-  "include": [
-    "src/**/*"
-  ],
-  "exclude": [
-    "node_modules",
-    "**/*.spec.ts"
-  ]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "**/*.spec.ts", "**/*e2e-spec.ts"]
 }
