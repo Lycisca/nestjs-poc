@@ -1,8 +1,8 @@
 import { createTransporter, mockTransporter } from './application.mailer';
-import { welcomeEmail } from './welcome.email';
+import { WelcomeEmail } from './welcome.email';
 
 createTransporter().then(transporter => {
-  welcomeEmail(transporter)({ to: 'example@example.com', name: 'Miguel' });
+  WelcomeEmail(transporter)({ to: 'example@example.com', name: 'Miguel' });
 });
 
 // mockTransporter().then(transporter => {
