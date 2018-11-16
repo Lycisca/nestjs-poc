@@ -9,8 +9,8 @@ import { JobProvider } from '../jobs/application.job';
 export class UsersService {
   constructor(
     @Inject('jobProvider') private readonly jobProvider: JobProvider,
-    @Inject('welcomeEmail') private readonly welcomeEmail,
     @Inject('UsersRepository') private readonly usersRepository: typeof User,
+    @Inject('welcomeEmail') private readonly welcomeEmail,
   ) {}
 
   async findOneByEmailAndPassword(

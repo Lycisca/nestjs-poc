@@ -6,6 +6,8 @@ import { DatabaseModule } from '../databases/database.module';
 import { JobProvider } from '../jobs/application.job';
 import { JwtAuthService } from '../auth/jwtAuth.service';
 import { JwtAuthGuard } from '../auth/auth.guard';
+import { mockTransporter } from '../mailer/application.mailer';
+import { welcomeEmail } from '../mailer/welcome.email';
 
 describe('UsersController', () => {
   let usersController: UsersController;
@@ -23,6 +25,12 @@ describe('UsersController', () => {
           provide: 'jobProvider',
           useFactory: () => {
             new JobProvider();
+          },
+        },
+        {
+          provide: 'welcomeEmail',
+          useFactory: async () => {
+            return welcomeEmail(await mockTransporter());
           },
         },
       ],
