@@ -4,11 +4,11 @@ const path = require('path');
 const Email = require('email-templates');
 
 export const WelcomeEmail = transporter => ({ to, name }) => {
-  welcomeEmailTemplate({ to, name }).then(html => {
+  welcomeEmailTemplate({ to, name }).then(({ html, text }) => {
     sendEmail(transporter)({
       to,
       subject: 'Hello ✔',
-      text: '',
+      text,
       html,
     });
   });
@@ -16,7 +16,7 @@ export const WelcomeEmail = transporter => ({ to, name }) => {
 
 const welcomeEmailTemplate = async ({ to, name }) => {
   const email = new Email();
-  return email.render(path.join(__dirname, 'emails', 'welcome', 'html'), {
+  return email.renderAll(path.join(__dirname, 'emails', 'welcome'), {
     to,
     name,
   });
