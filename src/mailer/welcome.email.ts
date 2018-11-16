@@ -1,15 +1,10 @@
 import { sendEmail } from './application.mailer';
 
-const welcomeEmail = ({ to, name }) => {
-  sendEmail({
+export const welcomeEmail = transporter => ({ to, name }) => {
+  sendEmail(transporter)({
     to,
     text: `Welcome ${name}`,
     subject: 'Hello ✔',
     html: `<b>Welcome ${name}</b>`,
   });
 };
-
-// welcomeEmail({
-//   to: 'user@example.com',
-//   name: 'Miguel',
-// });

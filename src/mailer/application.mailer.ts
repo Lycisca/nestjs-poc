@@ -1,18 +1,26 @@
 const nodemailer = require('nodemailer');
 
-export const sendEmail = (
-  { from = 'defaultFrom@example.com', to, subject, text, html },
-  adapter = 'test',
-) => {
-  if (adapter == 'test') {
-    sendEmailTest({ from, to, subject, text, html });
-  }
+interface Tasporter {
+  sendMail: (emailOptions: any, callback: (err, info) => {}) => {};
+}
+
+export const sendEmail = trasporter => ({
+  from = 'defaultFrom@example.com',
+  to,
+  subject,
+  text,
+  html,
+}) => {
+  trasporter.sendMail({ from, to, subject, text, html }, (error, info) => {
+    if (error) return console.log(error);
+    console.log('Message sent: %s', info.messageId);
+    // console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+  });
 };
 
-export const sendEmailTest = mailOptions => {
+export const testTrasporter = callback => {
   nodemailer.createTestAccount((err, account) => {
-    // create reusable transporter object using the default SMTP transport
-    const transporter = nodemailer.createTransport({
+    const trasporter = nodemailer.createTransport({
       host: 'smtp.ethereal.email',
       port: 587,
       secure: false, // true for 465, false for other ports
@@ -21,11 +29,6 @@ export const sendEmailTest = mailOptions => {
         pass: account.pass, // generated ethereal password
       },
     });
-
-    transporter.sendMail(mailOptions, (error, info) => {
-      if (error) return console.log(error);
-      console.log('Message sent: %s', info.messageId);
-      console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
-    });
+    callback(trasporter);
   });
 };
