@@ -13,6 +13,8 @@ import { jobProvider } from './jobs/queue.provider';
 import { RedisService } from './cache/redis.service';
 import { JwtAuthService } from './auth/jwtAuth.service';
 import { JwtAuthGuard } from './auth/auth.guard';
+import { createTransporter } from './mailer/application.mailer';
+import { welcomeEmail } from './mailer/welcome.email';
 
 const axios = require('axios');
 
@@ -45,6 +47,12 @@ const getScope = headers => {
     {
       provide: 'BreedsService',
       useValue: new BreedsService(axios, new RedisService()),
+    },
+    {
+      provide: 'welcomeEmail',
+      useFactory: async () => {
+        return welcomeEmail(await createTransporter());
+      },
     },
     DatabaseModule,
   ],

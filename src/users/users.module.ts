@@ -6,6 +6,8 @@ import { DatabaseModule } from '../databases/database.module';
 import { jobProvider } from '../jobs/queue.provider';
 import { JwtAuthService } from '../auth/jwtAuth.service';
 import { JwtAuthGuard } from '../auth/auth.guard';
+import { createTransporter } from '../mailer/application.mailer';
+import { welcomeEmail } from '../mailer/welcome.email';
 
 @Module({
   controllers: [UsersController],
@@ -15,6 +17,12 @@ import { JwtAuthGuard } from '../auth/auth.guard';
     UsersService,
     ...usersProviders,
     jobProvider,
+    {
+      provide: 'welcomeEmail',
+      useFactory: async () => {
+        return welcomeEmail(await createTransporter());
+      },
+    },
   ],
   imports: [DatabaseModule],
   exports: [],

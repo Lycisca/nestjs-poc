@@ -9,6 +9,7 @@ import { JobProvider } from '../jobs/application.job';
 export class UsersService {
   constructor(
     @Inject('jobProvider') private readonly jobProvider: JobProvider,
+    @Inject('welcomeEmail') private readonly welcomeEmail,
     @Inject('UsersRepository') private readonly usersRepository: typeof User,
   ) {}
 
@@ -33,6 +34,7 @@ export class UsersService {
 
   async create(createUserDto: CreateUserDto): Promise<User> {
     const user = await User.create(createUserDto);
+    this.welcomeEmail({ to: 'example@example.com', name: user.firstName });
     new EmailJob(this.jobProvider).performLater({ to: 'example@example.com' });
     return await user;
   }
