@@ -1,11 +1,10 @@
-import { sendEmail } from './application.mailer';
-import { createTransporter } from './application.mailer';
 const path = require('path');
 const Email = require('email-templates');
 
 export const WelcomeEmail = transporter => ({ to, name }) => {
   welcomeEmailTemplate({ to, name }).then(({ html, text }) => {
-    sendEmail(transporter)({
+    transporter.sendMail({
+      from: 'defaultFrom@example.com',
       to,
       subject: 'Hello ✔',
       text,
