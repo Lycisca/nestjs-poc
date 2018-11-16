@@ -3,8 +3,8 @@ import { UsersService } from './users.service';
 import { databaseProviders } from '../databases/database.providers';
 import { User } from './user.entity';
 import { JobProvider } from '../jobs/application.job';
-import { mockTransporter } from '../mailer/application.mailer';
-import { WelcomeEmail } from '../mailer/welcome.email';
+import { mockTransporter } from '../mailer/mailer.provider';
+import { WelcomeEmail } from '../mailer/welcome.mailer';
 
 class UserMock {
   static findAll<T extends Model<T>>(

@@ -6,8 +6,8 @@ import { DatabaseModule } from '../databases/database.module';
 import { jobProvider } from '../jobs/queue.provider';
 import { JwtAuthService } from '../auth/jwtAuth.service';
 import { JwtAuthGuard } from '../auth/auth.guard';
-import { createTransporter } from '../mailer/application.mailer';
-import { WelcomeEmail } from '../mailer/welcome.email';
+import { createTransporter } from '../mailer/mailer.provider';
+import { WelcomeEmail } from '../mailer/welcome.mailer';
 
 @Module({
   controllers: [UsersController],
