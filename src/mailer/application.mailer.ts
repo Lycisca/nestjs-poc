@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer');
 
-interface Tasporter {
+interface Transporter {
   sendMail: (emailOptions: any, callback: (err, info) => {}) => {};
 }
 
