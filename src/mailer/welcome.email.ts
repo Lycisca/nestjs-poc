@@ -1,6 +1,6 @@
 import { sendEmail } from './application.mailer';
 
-export const welcomeEmail = transporter => ({ to, name }) => {
+export const WelcomeEmail = transporter => ({ to, name }) => {
   sendEmail(transporter)({
     to,
     text: `Welcome ${name}`,

@@ -4,7 +4,7 @@ import { databaseProviders } from '../databases/database.providers';
 import { User } from './user.entity';
 import { JobProvider } from '../jobs/application.job';
 import { mockTransporter } from '../mailer/application.mailer';
-import { welcomeEmail } from '../mailer/welcome.email';
+import { WelcomeEmail } from '../mailer/welcome.email';
 
 class UserMock {
   static findAll<T extends Model<T>>(
@@ -17,8 +17,8 @@ class UserMock {
 
 const usersServiceFactory = async repo => {
   databaseProviders[0].useFactory();
-  const welcomeEmailInstance = welcomeEmail(await mockTransporter());
-  return new UsersService(new JobProvider(), repo, welcomeEmailInstance);
+  const welcomeEmail = WelcomeEmail(await mockTransporter());
+  return new UsersService(new JobProvider(), repo, welcomeEmail);
 };
 
 describe('Users Service', () => {

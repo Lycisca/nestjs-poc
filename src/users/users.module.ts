@@ -7,7 +7,7 @@ import { jobProvider } from '../jobs/queue.provider';
 import { JwtAuthService } from '../auth/jwtAuth.service';
 import { JwtAuthGuard } from '../auth/auth.guard';
 import { createTransporter } from '../mailer/application.mailer';
-import { welcomeEmail } from '../mailer/welcome.email';
+import { WelcomeEmail } from '../mailer/welcome.email';
 
 @Module({
   controllers: [UsersController],
@@ -20,7 +20,7 @@ import { welcomeEmail } from '../mailer/welcome.email';
     {
       provide: 'welcomeEmail',
       useFactory: async () => {
-        return welcomeEmail(await createTransporter());
+        return WelcomeEmail(await createTransporter());
       },
     },
   ],

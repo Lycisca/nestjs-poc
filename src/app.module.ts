@@ -14,7 +14,7 @@ import { RedisService } from './cache/redis.service';
 import { JwtAuthService } from './auth/jwtAuth.service';
 import { JwtAuthGuard } from './auth/auth.guard';
 import { createTransporter } from './mailer/application.mailer';
-import { welcomeEmail } from './mailer/welcome.email';
+import { WelcomeEmail } from './mailer/welcome.email';
 
 const axios = require('axios');
 
@@ -51,7 +51,7 @@ const getScope = headers => {
     {
       provide: 'welcomeEmail',
       useFactory: async () => {
-        return welcomeEmail(await createTransporter());
+        return WelcomeEmail(await createTransporter());
       },
     },
     DatabaseModule,

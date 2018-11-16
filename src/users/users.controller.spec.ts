@@ -7,7 +7,7 @@ import { JobProvider } from '../jobs/application.job';
 import { JwtAuthService } from '../auth/jwtAuth.service';
 import { JwtAuthGuard } from '../auth/auth.guard';
 import { mockTransporter } from '../mailer/application.mailer';
-import { welcomeEmail } from '../mailer/welcome.email';
+import { WelcomeEmail } from '../mailer/welcome.email';
 
 describe('UsersController', () => {
   let usersController: UsersController;
@@ -30,7 +30,7 @@ describe('UsersController', () => {
         {
           provide: 'welcomeEmail',
           useFactory: async () => {
-            return welcomeEmail(await mockTransporter());
+            return WelcomeEmail(await mockTransporter());
           },
         },
       ],
