@@ -13,7 +13,10 @@ export const WelcomeEmail = transporter => ({ to, name }) => {
   });
 };
 
-const welcomeEmailTemplate = async ({ to, name }) => {
+export const welcomeEmailTemplate = async ({
+  to,
+  name,
+}): Promise<{ html: string; text: string }> => {
   const email = new Email();
   return email.renderAll(path.join(__dirname, 'emails', 'welcome'), {
     to,
