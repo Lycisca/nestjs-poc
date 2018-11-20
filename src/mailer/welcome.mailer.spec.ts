@@ -8,5 +8,7 @@ describe('Mailer welcome', () => {
     });
     expect(typeof html).toBe('string');
     expect(typeof text).toBe('string');
+    expect(html).toBe('<b>Bienvenido Example</b>');
+    expect(text).toBe('Bienvenido Example');
   });
 });

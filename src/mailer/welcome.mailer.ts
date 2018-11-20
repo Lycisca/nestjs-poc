@@ -1,3 +1,4 @@
+import I18n from '../i18n/i18n';
 const path = require('path');
 const Email = require('email-templates');
 
@@ -21,5 +22,8 @@ export const welcomeEmailTemplate = async ({
   return email.renderAll(path.join(__dirname, 'emails', 'welcome'), {
     to,
     name,
+    t: {
+      welcome: I18n.t('Welcome', { locale: 'es' }),
+    },
   });
 };
