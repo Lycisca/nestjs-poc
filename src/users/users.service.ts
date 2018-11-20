@@ -10,6 +10,7 @@ export class UsersService {
   constructor(
     @Inject('jobProvider') private readonly jobProvider: JobProvider,
     @Inject('UsersRepository') private readonly usersRepository: typeof User,
+    @Inject('welcomeEmail') private readonly welcomeEmail,
   ) {}
 
   async findOneByEmailAndPassword(
@@ -33,6 +34,7 @@ export class UsersService {
 
   async create(createUserDto: CreateUserDto): Promise<User> {
     const user = await User.create(createUserDto);
+    this.welcomeEmail({ to: 'example@example.com', name: user.firstName });
     new EmailJob(this.jobProvider).performLater({ to: 'example@example.com' });
     return await user;
   }
