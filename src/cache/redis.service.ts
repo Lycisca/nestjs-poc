@@ -27,3 +27,17 @@ export class RedisService {
     });
   }
 }
+
+export const withRedisCache = (key, time?) => (target, name, descriptor) => {
+  const original = descriptor.value;
+  const redisService = new RedisService();
+  descriptor.value = function(...args) {
+    if (typeof key === 'function') {
+      key = key(...args);
+    }
+    const promise = original.apply(this, args);
+    return redisService.redisFetch(key, promise, time);
+  };
+
+  return descriptor;
+};
