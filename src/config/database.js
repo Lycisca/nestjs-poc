@@ -38,6 +38,7 @@ const config = {
       // },
       timestamps: true,
     },
+    sync: true,
   },
   production: {
     dialect: 'mysql',

@@ -16,7 +16,7 @@ class UserMock {
 }
 
 const usersServiceFactory = async repo => {
-  databaseProviders[0].useFactory();
+  await databaseProviders[0].useFactory();
   const welcomeEmail = WelcomeEmail(await mockTransporter());
   return new UsersService(new JobProvider(), repo, welcomeEmail);
 };
@@ -33,5 +33,17 @@ describe('Users Service', () => {
     const usersService = await usersServiceFactory(UserMock);
     const users = await usersService.index();
     expect(users).toEqual([{ firstName: 'user' }]);
+  });
+
+  it('test create user', async () => {
+    const usersService = await usersServiceFactory(User);
+    const user = await usersService.create({
+      email: 'email',
+      password: 'password',
+      firstName: 'Jhon',
+      lastName: 'Dooe',
+    });
+    // expect(users).toBeInstanceOf(Array);
+    expect(user).toHaveProperty('createdAt');
   });
 });
