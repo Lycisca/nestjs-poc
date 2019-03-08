@@ -29,7 +29,6 @@ const config = {
     dialect: 'sqlite',
     // the storage engine for sqlite
     // - default ':memory:'
-    storage: 'db/database.sqlite',
     logging: false,
     define: {
       // underscored: false

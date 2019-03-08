@@ -46,6 +46,7 @@ describe('AppController (e2e)', () => {
       .end((err, res) => {
         expect(res.body).toHaveProperty('id');
         expect(res.body).toHaveProperty('firstName');
+        expect(res.body).toHaveProperty('createdAt');
         if (err) return done(err);
         done();
       });
