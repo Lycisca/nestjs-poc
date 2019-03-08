@@ -5,6 +5,7 @@ import { User } from './user.entity';
 import { JobProvider } from '../jobs/application.job';
 import { mockTransporter } from '../mailer/mailer.provider';
 import { WelcomeEmail } from '../mailer/welcome.mailer';
+import { Cat as catRepository } from '../cats/cat.entity';
 
 class UserMock {
   static findAll<T extends Model<T>>(
@@ -44,5 +45,25 @@ describe('Users Service', () => {
       lastName: 'Dooe',
     });
     expect(user).toHaveProperty('createdAt');
+  });
+
+  it('test create user has one cat', async () => {
+    const usersService = await usersServiceFactory(User);
+    const user = await usersService.create({
+      email: 'email',
+      password: 'password',
+      firstName: 'Jhon',
+      lastName: 'Dooe',
+    });
+
+    const cat = await catRepository.create({ name: 'pelusa', userId: user.id });
+
+    expect(user).toHaveProperty('createdAt');
+    expect(cat).toHaveProperty('createdAt');
+    expect(cat.userId).toEqual(user.id);
+    await user.destroy();
+    const catFind = await catRepository.find(cat.id);
+    expect(catFind).toEqual(null);
+    // expect(cat.id).toEqual(cat.id);
   });
 });

@@ -93,7 +93,7 @@
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"
     },
-    "collectCoverage": true,
+    "collectCoverage": false,
     "coverageDirectory": "../coverage",
     "reporters": [
       "default",
