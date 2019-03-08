@@ -43,7 +43,6 @@ describe('Users Service', () => {
       firstName: 'Jhon',
       lastName: 'Dooe',
     });
-    // expect(users).toBeInstanceOf(Array);
     expect(user).toHaveProperty('createdAt');
   });
 });
