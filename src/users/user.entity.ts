@@ -1,14 +1,14 @@
 import { Table, Column, Model, HasOne, HasMany } from 'sequelize-typescript';
 import sequelize = require('sequelize');
-// import { Cat } from '../cats/cat.entity';
+import { Cat } from '../cats/cat.entity';
 
 @Table
 export class User extends Model<User> {
-  // @HasOne(() => User)
+  // @HasOne(() => Cat)
   // cat: Cat;
 
-  // @HasMany(() => Cat)
-  // cats: Cat[];
+  @HasMany(() => Cat)
+  cats: Cat[];
 
   @Column
   email: string;

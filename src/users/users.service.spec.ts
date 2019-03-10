@@ -64,6 +64,5 @@ describe('Users Service', () => {
     await user.destroy();
     const catFind = await catRepository.find(cat.id);
     expect(catFind).toEqual(null);
-    // expect(cat.id).toEqual(cat.id);
   });
 });
