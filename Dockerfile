@@ -1,4 +1,4 @@
-FROM node:10.12.0-alpine as builder
+FROM node:10.13.0-alpine as builder
 
 ARG NODE_ENV=production
 ENV NODE_ENV=$NODE_ENV
@@ -10,7 +10,7 @@ COPY . .
 RUN npm run build:prod
 
 # ======== Multi stage ==========
-FROM node:10.12.0-alpine
+FROM node:10.13.0-alpine
 
 ENV NODE_ENV=production
 
