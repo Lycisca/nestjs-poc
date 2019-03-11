@@ -13,7 +13,10 @@ export class Cat extends Model<Cat> {
   @Column
   userId: number;
 
-  @BelongsTo(() => User, { onDelete: 'CASCADE' })
+  // @BelongsTo(() => User, { onDelete: 'CASCADE' })
+  // user: User;
+
+  @BelongsTo(() => User)
   user: User;
 
   @Column

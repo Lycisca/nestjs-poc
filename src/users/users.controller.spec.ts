@@ -62,7 +62,12 @@ describe('UsersController', () => {
 
   describe('create', () => {
     it('should return a new user', async () => {
-      const result = { firstName: 'Nuria', lastName: 'Hernández' };
+      const result = {
+        email: 'example@example.com',
+        password: 'password',
+        firstName: 'Nuria',
+        lastName: 'Hernández',
+      };
       jest.spyOn(usersService, 'create').mockImplementation(() => result);
 
       expect(await usersController.create(result)).toBe(result);
@@ -71,7 +76,12 @@ describe('UsersController', () => {
 
   describe('create', () => {
     it('should return a new user', async () => {
-      const result = { firstName: 'Nuria', lastName: 'Hernández' };
+      const result = {
+        email: 'example@example.com',
+        password: 'password',
+        firstName: 'Nuria',
+        lastName: 'Hernández',
+      };
       jest.spyOn(usersService, 'create').mockImplementation(() => result);
 
       expect(await usersController.create(result)).toBe(result);

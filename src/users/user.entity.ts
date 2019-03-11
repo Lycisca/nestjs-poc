@@ -4,11 +4,11 @@ import { Cat } from '../cats/cat.entity';
 
 @Table
 export class User extends Model<User> {
-  // @HasOne(() => Cat)
-  // cat: Cat;
+  @HasOne(() => Cat, { onDelete: 'CASCADE' })
+  cat: Cat;
 
-  @HasMany(() => Cat)
-  cats: Cat[];
+  // @HasMany(() => Cat)
+  // cats: Cat[];
 
   @Column
   email: string;
